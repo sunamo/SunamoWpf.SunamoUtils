@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>SunamoWpf.SunamoUtils</id>
+    <version>26.6.21.1</version>
+    <authors>www.sunamo.cz</authors>
+    <license type="expression">MIT</license>
+    <licenseUrl>https://licenses.nuget.org/MIT</licenseUrl>
+    <projectUrl>https://sunamo.github.io/PlatformIndependentNuGetPackages/SunamoWpf.SunamoUtils/</projectUrl>
+    <description>Utility helpers extracted from SunamoWpf (_sunamo layer)</description>
+    <releaseNotes>y</releaseNotes>
+    <copyright>www.sunamo.cz</copyright>
+    <repository type="git" url="https://github.com/sunamo/SunamoWpf.SunamoUtils.git" branch="refs/heads/master" commit="da28162af1c04e0e23b40d3bf31ed48596995446" />
+    <dependencies>
+      <group targetFramework="net10.0-windows7.0">
+        <dependency id="Microsoft.Extensions.Logging" version="10.0.8" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Windows.Compatibility" version="10.0.8" exclude="Build,Analyzers" />
+        <dependency id="ObjectDumper.NET" version="4.3.2" exclude="Build,Analyzers" />
+        <dependency id="System.Management" version="10.0.8" exclude="Build,Analyzers" />
+        <dependency id="TextCopy" version="6.2.1" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="E:\vs\Projects\PlatformIndependentNuGetPackages\SunamoWpf.SunamoUtils\SunamoWpf.SunamoUtils\bin\Release\net10.0-windows\SunamoWpf.SunamoUtils.pdb" target="lib\net10.0-windows7.0\SunamoWpf.SunamoUtils.pdb" />
+    <file src="E:\vs\Projects\PlatformIndependentNuGetPackages\SunamoWpf.SunamoUtils\SunamoWpf.SunamoUtils\bin\Release\net10.0-windows\SunamoWpf.SunamoUtils.dll" target="lib\net10.0-windows7.0\SunamoWpf.SunamoUtils.dll" />
+  </files>
+</package>

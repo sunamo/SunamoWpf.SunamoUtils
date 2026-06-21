@@ -1,0 +1,11 @@
+E:\vs\Projects\PlatformIndependentNuGetPackages\SunamoWpf.SunamoUtils\SunamoWpf.SunamoUtils\bin\Release\net10.0-windows\SunamoWpf.SunamoUtils.deps.json
+E:\vs\Projects\PlatformIndependentNuGetPackages\SunamoWpf.SunamoUtils\SunamoWpf.SunamoUtils\bin\Release\net10.0-windows\SunamoWpf.SunamoUtils.dll
+E:\vs\Projects\PlatformIndependentNuGetPackages\SunamoWpf.SunamoUtils\SunamoWpf.SunamoUtils\bin\Release\net10.0-windows\SunamoWpf.SunamoUtils.pdb
+E:\vs\Projects\PlatformIndependentNuGetPackages\SunamoWpf.SunamoUtils\SunamoWpf.SunamoUtils\obj\Release\net10.0-windows\SunamoWpf.SunamoUtils.csproj.AssemblyReference.cache
+E:\vs\Projects\PlatformIndependentNuGetPackages\SunamoWpf.SunamoUtils\SunamoWpf.SunamoUtils\obj\Release\net10.0-windows\SunamoWpf.SunamoUtils.GeneratedMSBuildEditorConfig.editorconfig
+E:\vs\Projects\PlatformIndependentNuGetPackages\SunamoWpf.SunamoUtils\SunamoWpf.SunamoUtils\obj\Release\net10.0-windows\SunamoWpf.SunamoUtils.csproj.CoreCompileInputs.cache
+E:\vs\Projects\PlatformIndependentNuGetPackages\SunamoWpf.SunamoUtils\SunamoWpf.SunamoUtils\obj\Release\net10.0-windows\SunamoWpf.SunamoUtils.sourcelink.json
+E:\vs\Projects\PlatformIndependentNuGetPackages\SunamoWpf.SunamoUtils\SunamoWpf.SunamoUtils\obj\Release\net10.0-windows\SunamoWpf.SunamoUtils.dll
+E:\vs\Projects\PlatformIndependentNuGetPackages\SunamoWpf.SunamoUtils\SunamoWpf.SunamoUtils\obj\Release\net10.0-windows\refint\SunamoWpf.SunamoUtils.dll
+E:\vs\Projects\PlatformIndependentNuGetPackages\SunamoWpf.SunamoUtils\SunamoWpf.SunamoUtils\obj\Release\net10.0-windows\SunamoWpf.SunamoUtils.pdb
+E:\vs\Projects\PlatformIndependentNuGetPackages\SunamoWpf.SunamoUtils\SunamoWpf.SunamoUtils\obj\Release\net10.0-windows\ref\SunamoWpf.SunamoUtils.dll
