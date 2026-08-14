@@ -2,6 +2,7 @@ namespace SunamoWpf._sunamo;
 
 /// <summary>
 /// </summary>
+[System.Runtime.Versioning.SupportedOSPlatform("windows")]
 public class RA
 {
     protected static List<string> valuesInKey;

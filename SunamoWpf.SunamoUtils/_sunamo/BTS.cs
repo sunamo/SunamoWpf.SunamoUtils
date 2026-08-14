@@ -179,7 +179,6 @@ public class BTS
             return uint.MaxValue;
         if (id == typeof(ulong)) return ulong.MaxValue;
         throw new Exception("Nepovolen\u00FD nehodnotov\u00FD typ v metod\u011B GetMaxValueForType");
-        return 0;
     }
     #endregion
     public static List<byte> ClearEndingsBytes(List<byte> plainTextBytes)
@@ -322,7 +321,6 @@ public class BTS
             return uint.MinValue;
         if (idt == typeof(ulong)) return ulong.MinValue;
         throw new Exception("Nepovolen\u00FD nehodnotov\u00FD typ v metod\u011B GetMinValueForType");
-        return null;
     }
     /// <summary>
     ///     If has value true, return true. Otherwise return false
