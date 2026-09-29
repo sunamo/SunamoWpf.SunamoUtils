@@ -1,6 +1,6 @@
 namespace SunamoWpf._sunamo;
 
-public class DumpAsStringHeaderArgsReflection
+internal class DumpAsStringHeaderArgsReflection
 {
     internal static DumpAsStringHeaderArgsReflection Default = new();
 

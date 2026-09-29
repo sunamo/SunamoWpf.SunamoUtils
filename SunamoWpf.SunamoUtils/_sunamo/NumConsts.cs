@@ -1,6 +1,7 @@
 namespace SunamoWpf._sunamo;
-public class NumConsts
+
+internal class NumConsts
 {
-    public const double zeroDouble = 0;
-    public const long kB = 1024;
+    internal const double zeroDouble = 0;
+    internal const long kB = 1024;
 }

@@ -1,8 +1,8 @@
 namespace SunamoWpf._sunamo;
 
-public class RandomHelper
+internal class RandomHelper
 {
-    public static byte RandomColorPart(bool light)
+    internal static byte RandomColorPart(bool light)
     {
         return RandomColorPart(light, 127f);
     }
@@ -11,12 +11,12 @@ public class RandomHelper
     private static readonly float s_lightColorBase = 256 - 229;
     private static readonly Random s_rnd = new(Guid.NewGuid().GetHashCode());
 
-    public static byte RandomByte(int od, int toInclude)
+    internal static byte RandomByte(int od, int toInclude)
     {
         return (byte)s_rnd.Next(od, toInclude + 1);
     }
 
-    public static T RandomEnum<T>()
+    internal static T RandomEnum<T>()
     {
         Array values = Enum.GetValues(typeof(T));
         Random random = new Random();
@@ -29,7 +29,7 @@ public class RandomHelper
         return RandomFloat(1, 0);
     }
 
-    public static float RandomFloat(int p, int maxP)
+    internal static float RandomFloat(int p, int maxP)
     {
 
 
@@ -38,7 +38,7 @@ public class RandomHelper
         double nahodneDouble = random.NextDouble() * rozsah + p;
         return (float)nahodneDouble;
     }
-    public static byte RandomColorPart(bool light, float add)
+    internal static byte RandomColorPart(bool light, float add)
     {
         if (light)
         {

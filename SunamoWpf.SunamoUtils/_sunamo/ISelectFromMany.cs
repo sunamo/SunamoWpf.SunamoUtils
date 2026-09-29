@@ -1,6 +1,6 @@
 namespace SunamoWpf._sunamo;
 
-public interface ISelectFromMany<Data>
+internal interface ISelectFromMany<Data>
 {
     void AddControl(Data data, bool b);
     void AddControls();
