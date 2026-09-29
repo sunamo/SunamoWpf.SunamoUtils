@@ -1,8 +1,8 @@
 namespace SunamoWpf._sunamo;
 
-public class SHFormat
+internal class SHFormat
 {
-    public static string Format2(string status, params object[] args)
+    internal static string Format2(string status, params object[] args)
     {
         if (string.IsNullOrWhiteSpace(status)) return string.Empty;
 
@@ -18,7 +18,7 @@ public class SHFormat
             return status;
         }
     }
-    public static string Format4(string v, params Object[] o)
+    internal static string Format4(string v, params Object[] o)
     {
         return string.Format(v, o);
     }

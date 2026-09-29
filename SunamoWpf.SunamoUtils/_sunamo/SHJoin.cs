@@ -1,8 +1,8 @@
 namespace SunamoWpf._sunamo;
 
-public class SHJoin
+internal class SHJoin
 {
-    public static string JoinDictionary(Dictionary<string, string> dictionary, string delimiter)
+    internal static string JoinDictionary(Dictionary<string, string> dictionary, string delimiter)
     {
         var sb = new StringBuilder();
         foreach (var item in dictionary) sb.AppendLine(item.Key + delimiter + item.Value);

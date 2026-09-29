@@ -1,6 +1,6 @@
 namespace SunamoWpf._sunamo;
 
-public enum DumpProvider
+internal enum DumpProvider
 {
     /// <summary>
     ///     When use JsonParser return empty.
