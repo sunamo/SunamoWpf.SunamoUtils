@@ -1,28 +1,28 @@
 namespace SunamoWpf._sunamo;
 
-internal static class SF
+public static class SF
 {
-    internal const string replaceForSeparatorString = "_";
+    public const string replaceForSeparatorString = "_";
     private static readonly SerializeContentArgs s_contentArgs = new();
     private static Type type = typeof(SF);
-    internal static readonly char replaceForSeparatorChar = '_';
-    internal static string dDeli = "|";
+    public static readonly char replaceForSeparatorChar = '_';
+    public static string dDeli = "|";
     static SF()
     {
         s_contentArgs.separatorString = "|";
     }
-    internal static string separatorString
+    public static string separatorString
     {
         get => s_contentArgs.separatorString;
         set => s_contentArgs.separatorString = value;
     }
-    internal static int keyCodeSeparator => s_contentArgs.separatorChar;
+    public static int keyCodeSeparator => s_contentArgs.separatorChar;
     /// <summary>
     ///     Must be property - I can forget change value on three occurences.
     /// </summary>
-    internal static char separatorChar => s_contentArgs.separatorChar;
+    public static char separatorChar => s_contentArgs.separatorChar;
     //CASH
-    internal static List<string> ParseUpToRequiredElementsLine(string input, int requiredCount)
+    public static List<string> ParseUpToRequiredElementsLine(string input, int requiredCount)
     {
         var p = GetAllElementsLine(input);
         if (p.Count > requiredCount)
@@ -32,7 +32,7 @@ internal static class SF
                 p.Add(string.Empty);
         return p;
     }
-    internal static Dictionary<T1, T2> ToDictionary<T1, T2>(List<List<string>> l)
+    public static Dictionary<T1, T2> ToDictionary<T1, T2>(List<List<string>> l)
     {
         var s1 = BTS.MethodForParse<T1>();
         var s2 = BTS.MethodForParse<T2>();
@@ -72,7 +72,7 @@ internal static class SF
     /// <param name="o"></param>
     /// <param name="p1"></param>
     /// <returns></returns>
-    internal static string PrepareToSerializationExplicitString(IList o, string p1 = "|")
+    public static string PrepareToSerializationExplicitString(IList o, string p1 = "|")
     {
         //var o3 = new List<string>(o);
         //var o2 = CA.Trim(o3);
@@ -87,7 +87,7 @@ internal static class SF
     /// </summary>
     /// <param name="p1"></param>
     /// <param name="o"></param>
-    internal static string PrepareToSerializationExplicit(IList o, string p1 = "|")
+    public static string PrepareToSerializationExplicit(IList o, string p1 = "|")
     {
         return PrepareToSerializationExplicitString(o, p1);
     }
@@ -96,12 +96,12 @@ internal static class SF
     /// </summary>
     /// <param name="file"></param>
     /// <returns></returns>
-    //internal static List<List<string>> GetAllElementsFile(string file)
+    //public static List<List<string>> GetAllElementsFile(string file)
     //{
     //    string firstLine = null;
     //    return GetAllElementsFile(file, ref firstLine);
     //}
-    internal static List<string> RemoveComments(List<string> tf)
+    public static List<string> RemoveComments(List<string> tf)
     {
         //CA.RemoveStringsEmpty2(tf);
         tf = tf.Where(d => !string.IsNullOrWhiteSpace(d)).ToList();
@@ -118,7 +118,7 @@ internal static class SF
         tf = tf.Where(d => !d.StartsWith("#")).ToList();
         return tf;
     }
-    internal static List<List<string>> GetAllElementsFile(string file/*, ref string firstCommentLine*/,
+    public static List<List<string>> GetAllElementsFile(string file/*, ref string firstCommentLine*/,
         string oddelovaciZnak = "|")
     {
 
@@ -132,7 +132,7 @@ internal static class SF
         if (header.Count > 0) rows.Insert(0, header);
         return rows;
     }
-    internal static
+    public static
 #if ASYNC
         async Task
 #else
@@ -147,18 +147,18 @@ internal static class SF
 #endif
             File.WriteAllTextAsync(file, sb.ToString());
     }
-    internal static void WriteAllElementsToFile<Key, Value>(string coolPeopleShortcuts, Dictionary<Key, Value> d2)
+    public static void WriteAllElementsToFile<Key, Value>(string coolPeopleShortcuts, Dictionary<Key, Value> d2)
     {
         var list = ListFromDictionary(d2);
         WriteAllElementsToFile(coolPeopleShortcuts, list).RunSynchronously();
     }
-    internal static async Task WriteAllElementsToFile(string VybranySouborLogu, List<List<string>> p)
+    public static async Task WriteAllElementsToFile(string VybranySouborLogu, List<List<string>> p)
     {
         var sb = new StringBuilder();
         foreach (var item in p) sb.AppendLine(PrepareToSerialization2(item));
         await File.WriteAllTextAsync(VybranySouborLogu, sb.ToString());
     }
-    internal static List<List<string>> ListFromDictionary<Key, Value>(Dictionary<Key, Value> d2)
+    public static List<List<string>> ListFromDictionary<Key, Value>(Dictionary<Key, Value> d2)
     {
         var vs = new List<List<string>>();
         foreach (var item in d2)
@@ -173,7 +173,7 @@ internal static class SF
     /// </summary>
     /// <param name="o"></param>
     /// <param name="separator"></param>
-    internal static string PrepareToSerialization2(IList<string> o)
+    public static string PrepareToSerialization2(IList<string> o)
     {
         return PrepareToSerializationWorker(o, true, dDeli);
     }
@@ -183,7 +183,7 @@ internal static class SF
     ///// Opposite method: DTHelperEn.ToString<>DTHelperEn.ParseDateTimeUSA
     ///// </summary>
     ///// <param name="pr"></param>
-    //internal static string PrepareToSerialization2(params string[] pr)
+    //public static string PrepareToSerialization2(params string[] pr)
     //{
     //    var ts = new List<string>(pr);
     //    return PrepareToSerializationWorker(ts, true, separatorString);
@@ -193,11 +193,11 @@ internal static class SF
     ///     If need to combine string and IList, lets use CA.Join
     /// </summary>
     /// <param name="o"></param>
-    internal static string PrepareToSerializationExplicit2(IList<string> o, string separator = "|")
+    public static string PrepareToSerializationExplicit2(IList<string> o, string separator = "|")
     {
         return PrepareToSerializationWorker(o, true, separator);
     }
-    internal static
+    public static
 #if ASYNC
         async Task
 #else
@@ -227,7 +227,7 @@ internal static class SF
         }
         return null;
     }
-    internal static
+    public static
 #if ASYNC
         async Task<List<List<string>>>
 #else
@@ -269,7 +269,7 @@ internal static class SF
     /// </summary>
     /// <param name="element"></param>
     /// <param name="line"></param>
-    internal static string GetElementAtIndexFile(string file, int element, int line)
+    public static string GetElementAtIndexFile(string file, int element, int line)
     {
         var elements = GetAllElementsFile(file);
         return GetElementAtIndex(elements, element, line);
@@ -279,7 +279,7 @@ internal static class SF
     /// </summary>
     /// <param name="file"></param>
     /// <param name="element"></param>
-    internal static List<string> GetFirstWhereIsFirstElement(string file, string element)
+    public static List<string> GetFirstWhereIsFirstElement(string file, string element)
     {
         var elementsLines = GetAllElementsFile(file);
         for (var i = 0; i < elementsLines.Count; i++)
@@ -292,7 +292,7 @@ internal static class SF
     /// </summary>
     /// <param name="file"></param>
     /// <param name="element"></param>
-    internal static List<string> GetLastWhereIsFirstElement(string file, string element)
+    public static List<string> GetLastWhereIsFirstElement(string file, string element)
     {
         var elementsLines = GetAllElementsFile(file);
         for (var i = elementsLines.Count - 1; i >= 0; i--)
@@ -304,7 +304,7 @@ internal static class SF
     ///     Read text with first delimitech which automatically delimite
     /// </summary>
     /// <param name="fileNameOrPath"></param>
-    internal static void ReadFileOfSettingsOther(string fileNameOrPath, Func<string, string> appDataCiReadFileOfSettingsOther)
+    public static void ReadFileOfSettingsOther(string fileNameOrPath, Func<string, string> appDataCiReadFileOfSettingsOther)
     {
         // COmmented, app data not should be in *.web. pass directly as arg
         List<string> lines = null;
@@ -315,7 +315,7 @@ internal static class SF
             if (int.TryParse(lines[0], out delimiterInt)) separatorString = ((char)delimiterInt).ToString();
         }
     }
-    internal static async Task WriteAllElementsToFile(string VybranySouborLogu, List<string>[] p)
+    public static async Task WriteAllElementsToFile(string VybranySouborLogu, List<string>[] p)
     {
         var sb = new StringBuilder();
         foreach (var item in p) sb.AppendLine(PrepareToSerialization2(item));
@@ -326,7 +326,7 @@ internal static class SF
     ///     DateTime is format with DTHelperEn.ToString
     /// </summary>
     /// <param name="o"></param>
-    internal static string PrepareToSerialization(params string[] o)
+    public static string PrepareToSerialization(params string[] o)
     {
         return PrepareToSerializationWorker(o.ToList(), true, dDeli);
     }
@@ -336,7 +336,7 @@ internal static class SF
     ///// Opposite method: DTHelperEn.ToString<>DTHelperEn.ParseDateTimeUSA
     ///// </summary>
     ///// <param name="pr"></param>
-    //internal static string PrepareToSerialization2(params string[] pr)
+    //public static string PrepareToSerialization2(params string[] pr)
     //{
     //    var ts = new List<string>(pr);
     //    return PrepareToSerializationWorker(ts, true, separatorString);
@@ -368,7 +368,7 @@ internal static class SF
     ///     <object> a po přenesení do params string[] mi vytvoří new string[]{}
     /// </summary>
     /// <param name="var"></param>
-    internal static List<string> GetAllElementsLine(string var, string oddelovaciZnak = null)
+    public static List<string> GetAllElementsLine(string var, string oddelovaciZnak = null)
     {
         if (oddelovaciZnak == null) oddelovaciZnak = "|";
         // Musí tu být none, protože pak když někde nic nebylo, tak mi to je nevrátilo a progran vyhodil IndexOutOfRangeException
@@ -380,7 +380,7 @@ internal static class SF
     /// <param name="file"></param>
     /// <param name="hlavicka"></param>
     /// <param name="oddelovaciZnak"></param>
-    internal static (List<string> header, List<List<string>> rows)
+    public static (List<string> header, List<List<string>> rows)
         GetAllElementsFileAdvanced(string file,
             string oddelovaciZnak = "|")
     {

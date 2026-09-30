@@ -1,38 +1,38 @@
 namespace SunamoWpf._sunamo;
 
-internal class BTS
+public class BTS
 {
     //        #region  from BTSShared64.cs
-    internal static int lastInt = -1;
-    internal static long lastLong = -1;
-    internal static float lastFloat = -1;
-    internal static double lastDouble = -1;
+    public static int lastInt = -1;
+    public static long lastLong = -1;
+    public static float lastFloat = -1;
+    public static double lastDouble = -1;
     private static Type type = typeof(BTS);
-    internal static byte lastByte = 255;
-    internal static bool lastBool;
-    internal static DateTime lastDateTime = DateTime.MinValue;
+    public static byte lastByte = 255;
+    public static bool lastBool;
+    public static DateTime lastDateTime = DateTime.MinValue;
     ///// <summary>
     /////     Usage: Usage: Exceptions.ArrayElementContainsUnallowedStrings->SH.ContainsAny
     ///// <typeparam name="T"></typeparam>
     ///// <param name="c"></param>
     ///// <param name="isChar"></param>
     ///// <returns></returns>
-    //internal static T CastToByT<T>(string c, bool isChar)
+    //public static T CastToByT<T>(string c, bool isChar)
     //{
     //    return isChar ? (T)(dynamic)c.First() : (T)(dynamic)c;
     //}
-    internal static string Replace(ref string id, bool replaceCommaForDot)
+    public static string Replace(ref string id, bool replaceCommaForDot)
     {
         if (replaceCommaForDot) id = id.Replace(",", ".");
         return id;
     }
-    internal static bool IsFloat(string id, bool replace = false)
+    public static bool IsFloat(string id, bool replace = false)
     {
         if (id == null) return false;
         Replace(ref id, replace);
         return float.TryParse(id.Replace(",", "."), out lastFloat);
     }
-    internal static bool IsDouble(string id, bool replace = false)
+    public static bool IsDouble(string id, bool replace = false)
     {
         if (id == null) return false;
         Replace(ref id, replace);
@@ -45,7 +45,7 @@ internal class BTS
     /// <param name="excIfIsFloat"></param>
     /// <param name="replaceCommaForDot"></param>
     /// <returns></returns>
-    internal static bool IsInt(string id, bool excIfIsFloat = false, bool replaceCommaForDot = false)
+    public static bool IsInt(string id, bool excIfIsFloat = false, bool replaceCommaForDot = false)
     {
         if (id == null) return false;
         id = id.Replace(" ", "");
@@ -57,7 +57,7 @@ internal class BTS
                     throw new Exception(id + " is float but is calling IsInt");
         return vr;
     }
-    internal static bool IsLong(string id, bool excIfIsDouble = false, bool replaceCommaForDot = false)
+    public static bool IsLong(string id, bool excIfIsDouble = false, bool replaceCommaForDot = false)
     {
         if (id == null) return false;
         id = id.Replace(" ", ""); //SHReplace.ReplaceAll4(, "", " ");
@@ -70,11 +70,11 @@ internal class BTS
         return vr;
     }
     //        #endregion
-    internal static int FromHex(string hexValue)
+    public static int FromHex(string hexValue)
     {
         return int.Parse(hexValue, NumberStyles.HexNumber);
     }
-    internal static Stream StreamFromString(string s)
+    public static Stream StreamFromString(string s)
     {
         var stream = new MemoryStream();
         var writer = new StreamWriter(stream);
@@ -83,14 +83,14 @@ internal class BTS
         stream.Position = 0;
         return stream;
     }
-    internal static string StringFromStream(Stream stream)
+    public static string StringFromStream(Stream stream)
     {
         var reader = new StreamReader(stream);
         var text = reader.ReadToEnd();
         return text;
     }
     #region Parse*
-    internal static bool TryParseBool(string trim)
+    public static bool TryParseBool(string trim)
     {
         return bool.TryParse(trim, out lastBool);
     }
@@ -100,7 +100,7 @@ internal class BTS
     /// </summary>
     /// <param name="tag2"></param>
     /// <param name="tag"></param>
-    internal static bool CompareAsObjectAndString(object tag2, object tag)
+    public static bool CompareAsObjectAndString(object tag2, object tag)
     {
         var same = false;
         if (tag2 != null)
@@ -116,7 +116,7 @@ internal class BTS
     /// </summary>
     /// <param name="hodnota"></param>
     /// <param name="paramy"></param>
-    internal static bool IsAllEquals(bool hodnota, params bool[] paramy)
+    public static bool IsAllEquals(bool hodnota, params bool[] paramy)
     {
         for (var i = 0; i < paramy.Length; i++)
             if (hodnota != paramy[i])
@@ -126,7 +126,7 @@ internal class BTS
     /// <param name="od"></param>
     /// <param name="to"></param>
     /// <param name="value"></param>
-    internal static bool IsInRange(int od, int to, int value)
+    public static bool IsInRange(int od, int to, int value)
     {
         if (value == 100)
         {
@@ -134,12 +134,12 @@ internal class BTS
         // Zde jsem měl opačně znaménka, teď už by to mělo být správně
         return od <= value && to >= value;
     }
-    internal static bool Is(bool binFp, bool n)
+    public static bool Is(bool binFp, bool n)
     {
         if (n) return !binFp;
         return binFp;
     }
-    internal static List<string> GetOnlyNonNullValues(params string[] args)
+    public static List<string> GetOnlyNonNullValues(params string[] args)
     {
         var vr = new List<string>();
         for (var i = 0; i < args.Length; i++)
@@ -155,7 +155,7 @@ internal class BTS
         return vr;
     }
     #region Get*ValueForType
-    internal static object GetMaxValueForType(Type id)
+    public static object GetMaxValueForType(Type id)
     {
         if (id == typeof(byte))
             return byte.MaxValue;
@@ -181,7 +181,7 @@ internal class BTS
         throw new Exception("Nepovolen\u00FD nehodnotov\u00FD typ v metod\u011B GetMaxValueForType");
     }
     #endregion
-    internal static List<byte> ClearEndingsBytes(List<byte> plainTextBytes)
+    public static List<byte> ClearEndingsBytes(List<byte> plainTextBytes)
     {
         var bytes = new List<byte>();
         var pridavat = false;
@@ -204,12 +204,12 @@ internal class BTS
         }
         return bytes;
     }
-    internal static int? ParseIntNull(string v)
+    public static int? ParseIntNull(string v)
     {
         if (int.TryParse(v, out lastInt)) return lastInt;
         return null;
     }
-    internal static string ToString<T>(T t)
+    public static string ToString<T>(T t)
     {
         return t.ToString();
     }
@@ -218,7 +218,7 @@ internal class BTS
     /// </summary>
     /// <typeparam name="T1"></typeparam>
     /// <returns></returns>
-    internal static object MethodForParse<T1>()
+    public static object MethodForParse<T1>()
     {
         var t = typeof(T1);
         #region Same seria as in DefaultValueForTypeT
@@ -247,7 +247,7 @@ internal class BTS
         #endregion
         return null;
     }
-    internal static bool IsDateTime(string dt)
+    public static bool IsDateTime(string dt)
     {
         if (dt == null) return false;
         return DateTime.TryParse(dt, out lastDateTime);
@@ -257,40 +257,40 @@ internal class BTS
     ///     Replace spaces
     /// </summary>
     /// <param name="entry"></param>
-    internal static int ParseInt(string entry)
+    public static int ParseInt(string entry)
     {
         var lastInt2 = 0;
         if (int.TryParse(entry.Replace(" ", string.Empty), out lastInt2)) return lastInt2;
         return int.MinValue;
     }
-    internal static bool IsBool(string trim)
+    public static bool IsBool(string trim)
     {
         if (trim == null) return false;
         return bool.TryParse(trim, out lastBool);
     }
-    internal static byte ParseByte(string entry)
+    public static byte ParseByte(string entry)
     {
         byte lastInt2 = 0;
         if (byte.TryParse(entry, out lastInt2)) return lastInt2;
         return byte.MinValue;
     }
-    internal static short ParseShort(string entry)
+    public static short ParseShort(string entry)
     {
         return ParseShort(entry, short.MinValue);
     }
-    internal static short ParseShort(string entry, short defVal)
+    public static short ParseShort(string entry, short defVal)
     {
         short lastInt2 = 0;
         if (short.TryParse(entry, out lastInt2)) return lastInt2;
         return defVal;
     }
-    internal static int? ParseInt(string entry, int? _default)
+    public static int? ParseInt(string entry, int? _default)
     {
         var lastInt2 = 0;
         if (int.TryParse(entry, out lastInt2)) return lastInt2;
         return _default;
     }
-    internal static string BoolToStringEn(bool p, bool lower = false)
+    public static string BoolToStringEn(bool p, bool lower = false)
     {
         string vr = null;
         if (p)
@@ -303,7 +303,7 @@ internal class BTS
         }
         return vr;
     }
-    internal static object GetMinValueForType(Type idt)
+    public static object GetMinValueForType(Type idt)
     {
         if (idt == typeof(byte))
             return 1;
@@ -326,19 +326,19 @@ internal class BTS
     ///     If has value true, return true. Otherwise return false
     /// </summary>
     /// <param name="t"></param>
-    internal static bool GetValueOfNullable(bool? t)
+    public static bool GetValueOfNullable(bool? t)
     {
         if (t.HasValue) return t.Value;
         return false;
     }
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    internal static bool Invert(bool b, bool really)
+    public static bool Invert(bool b, bool really)
     {
         if (really) return !b;
         return b;
     }
     #region For easy copy from BTSShared64.cs
-    internal static T CastToByT<T>(string c, bool isChar)
+    public static T CastToByT<T>(string c, bool isChar)
     {
         if (isChar)
             return (T)(dynamic)c.First();
@@ -348,11 +348,11 @@ internal class BTS
     //{
     //    return se.BTS.Replace(ref id, replace);
     //}
-    //internal static bool IsFloat(string id, bool replace = false)
+    //public static bool IsFloat(string id, bool replace = false)
     //{
     //    return se.BTS.IsFloat(id, replace);
     //}
-    //internal static bool IsInt(string id, bool excIfIsFloat = false, bool replace = false)
+    //public static bool IsInt(string id, bool excIfIsFloat = false, bool replace = false)
     //{
     //    return se.BTS.IsInt(id, excIfIsFloat, replace);
     //}
@@ -364,24 +364,24 @@ internal class BTS
     /// <param name="v"></param>
     /// <param name="ciForParse"></param>
     /// <param name="defaultValue"></param>
-    internal static DateTime TryParseDateTime(string v, CultureInfo ciForParse, DateTime defaultValue)
+    public static DateTime TryParseDateTime(string v, CultureInfo ciForParse, DateTime defaultValue)
     {
         var vr = defaultValue;
         if (DateTime.TryParse(v, ciForParse, DateTimeStyles.None, out vr)) return vr;
         return defaultValue;
     }
-    internal static uint lastUint;
-    internal static bool TryParseUint(string entry)
+    public static uint lastUint;
+    public static bool TryParseUint(string entry)
     {
         // Pokud bude A1 null, výsledek bude false
         return uint.TryParse(entry, out lastUint);
     }
-    internal static bool TryParseDateTime(string entry)
+    public static bool TryParseDateTime(string entry)
     {
         if (DateTime.TryParse(entry, out lastDateTime)) return true;
         return false;
     }
-    internal static byte TryParseByte(string p1, byte _def)
+    public static byte TryParseByte(string p1, byte _def)
     {
         var vr = _def;
         if (byte.TryParse(p1, out vr)) return vr;
@@ -392,24 +392,24 @@ internal class BTS
     /// </summary>
     /// <param name="p"></param>
     /// <param name="_default"></param>
-    internal static bool TryParseBool(string p, bool _default)
+    public static bool TryParseBool(string p, bool _default)
     {
         var vr = _default;
         if (bool.TryParse(p, out vr)) return vr;
         return _default;
     }
-    internal static int TryParseIntCheckNull(string entry, int def)
+    public static int TryParseIntCheckNull(string entry, int def)
     {
         var lastInt = 0;
         if (entry == null) return lastInt;
         if (int.TryParse(entry, out lastInt)) return lastInt;
         return def;
     }
-    internal static int TryParseInt(string entry, int def)
+    public static int TryParseInt(string entry, int def)
     {
         return TryParseInt(entry, def, false);
     }
-    internal static int TryParseInt(string entry, int def, bool throwEx)
+    public static int TryParseInt(string entry, int def, bool throwEx)
     {
         var lastInt = 0;
         if (int.TryParse(entry, out lastInt)) return lastInt;
@@ -418,7 +418,7 @@ internal class BTS
     }
     #endregion
     #region int <> bool
-    internal static int BoolToInt(bool v)
+    public static int BoolToInt(bool v)
     {
         return Convert.ToInt32(v);
     }
@@ -426,13 +426,13 @@ internal class BTS
     ///     0 - false, all other - 1
     /// </summary>
     /// <param name="v"></param>
-    internal static bool IntToBool(int v)
+    public static bool IntToBool(int v)
     {
         return Convert.ToBoolean(v);
     }
     #endregion
     #region Parse*
-    internal static float ParseFloat(string ratingS)
+    public static float ParseFloat(string ratingS)
     {
         var vr = float.MinValue;
         ratingS = ratingS.Replace(',', '.');
@@ -443,7 +443,7 @@ internal class BTS
     ///     Vrátí false v případě že se nepodaří vyparsovat
     /// </summary>
     /// <param name="displayAnchors"></param>
-    internal static bool ParseBool(string displayAnchors)
+    public static bool ParseBool(string displayAnchors)
     {
         var vr = false;
         if (bool.TryParse(displayAnchors, out vr)) return vr;
@@ -453,13 +453,13 @@ internal class BTS
     ///     Vrátí A2 v případě že se nepodaří vyparsovat
     /// </summary>
     /// <param name="displayAnchors"></param>
-    internal static bool ParseBool(string displayAnchors, bool def)
+    public static bool ParseBool(string displayAnchors, bool def)
     {
         var vr = false;
         if (bool.TryParse(displayAnchors, out vr)) return vr;
         return def;
     }
-    internal static int ParseInt(string entry, bool mustBeAllNumbers)
+    public static int ParseInt(string entry, bool mustBeAllNumbers)
     {
         int d;
         if (!int.TryParse(entry, out d))
@@ -467,7 +467,7 @@ internal class BTS
                 return int.MinValue;
         return d;
     }
-    internal static double ParseDouble(string entry, double _default)
+    public static double ParseDouble(string entry, double _default)
     {
         //entry = SH.FromSpace160To32(entry);
         entry = entry.Replace(" ", string.Empty);
@@ -476,7 +476,7 @@ internal class BTS
         if (double.TryParse(entry, out lastDouble2)) return lastDouble2;
         return _default;
     }
-    internal static int ParseInt(string entry, int _default)
+    public static int ParseInt(string entry, int _default)
     {
         //entry = SH.FromSpace160To32(entry);
         entry = entry.Replace(" ", string.Empty);
@@ -485,7 +485,7 @@ internal class BTS
         if (int.TryParse(entry, out lastInt2)) return lastInt2;
         return _default;
     }
-    internal static byte ParseByte(string entry, byte def)
+    public static byte ParseByte(string entry, byte def)
     {
         byte lastInt2 = 0;
         if (byte.TryParse(entry, out lastInt2)) return lastInt2;
@@ -493,12 +493,12 @@ internal class BTS
     }
     #endregion
     #region Is*
-    internal static bool IsByte(string f)
+    public static bool IsByte(string f)
     {
         if (f == null) return false;
         return byte.TryParse(f, out lastByte);
     }
-    internal static bool IsByte(string id, out byte b)
+    public static bool IsByte(string id, out byte b)
     {
         if (id == null)
         {
@@ -516,7 +516,7 @@ internal class BTS
     ///     0 - false, all other - 1
     /// </summary>
     /// <param name="v"></param>
-    internal static bool IntToBool(object v)
+    public static bool IntToBool(object v)
     {
         var s = v.ToString().Trim();
         if (s == string.Empty) return false;
@@ -532,7 +532,7 @@ internal class BTS
     ///     G bool repr. A1. Pro Yes true, JF.
     /// </summary>
     /// <param name="s"></param>
-    internal static bool StringToBool(string s)
+    public static bool StringToBool(string s)
     {
         if (s == Yes || s == bool.TrueString || s == One || s == Ano) return true;
         return false;
@@ -541,7 +541,7 @@ internal class BTS
     ///     G str rep. pro A1 - Ano/Ne
     /// </summary>
     /// <param name="v"></param>
-    internal static string BoolToString(bool p)
+    public static string BoolToString(bool p)
     {
         if (p) return Ano;
         return Ne;
@@ -549,29 +549,29 @@ internal class BTS
 
     #endregion
     #region byte[] <> string
-    internal static List<byte> ConvertFromUtf8ToBytes(string vstup)
+    public static List<byte> ConvertFromUtf8ToBytes(string vstup)
     {
         return Encoding.UTF8.GetBytes(vstup).ToList();
     }
-    internal static string ConvertFromBytesToUtf8(List<byte> bajty)
+    public static string ConvertFromBytesToUtf8(List<byte> bajty)
     {
         //NH.RemoveEndingZeroPadding(bajty);
         return Encoding.UTF8.GetString(bajty.ToArray());
     }
-    internal static bool FalseOrNull(object get)
+    public static bool FalseOrNull(object get)
     {
         return get == null || get.ToString() == false.ToString();
     }
     #endregion
     #region Casting between array - cant commented because it wasnt visible between
-    internal static List<string> CastArrayObjectToString(object[] args)
+    public static List<string> CastArrayObjectToString(object[] args)
     {
         var vr = new List<string>(args.Length);
         //CA.InitFillWith(vr, args.Length);
         for (var i = 0; i < args.Length; i++) vr[i] = args[i].ToString();
         return vr;
     }
-    internal static List<string> CastArrayIntToString(int[] args)
+    public static List<string> CastArrayIntToString(int[] args)
     {
         var vr = new List<string>(args.Length);
         for (var i = 0; i < args.Length; i++) vr[i] = args[i].ToString();
@@ -579,7 +579,7 @@ internal class BTS
     }
     #endregion
     #region Castint to Array - commented, its in used only List
-    //internal static int[] CastArrayStringToInt(List<string> plemena)
+    //public static int[] CastArrayStringToInt(List<string> plemena)
     //    {
     //        int[] vr = new int[plemena.Length];
     //        for (int i = 0; i < plemena.Length; i++)
@@ -588,7 +588,7 @@ internal class BTS
     //        }
     //        return vr;
     //    }
-    //    internal static short[] CastArrayStringToShort(List<string> plemena)
+    //    public static short[] CastArrayStringToShort(List<string> plemena)
     //    {
     //        short[] vr = new short[plemena.Count];
     //        for (int i = 0; i < plemena.Count; i++)
@@ -597,7 +597,7 @@ internal class BTS
     //        }
     //        return vr;
     //    }
-    //    internal static List<string> CastArrayObjectToString(string[] args)
+    //    public static List<string> CastArrayObjectToString(string[] args)
     //    {
     //        List<string> vr = new string[args.Length];
     //        for (int i = 0; i < args.Length; i++)
@@ -606,7 +606,7 @@ internal class BTS
     //        }
     //        return vr;
     //    }
-    //internal static List<string> CastArrayIntToString(int[] args)
+    //public static List<string> CastArrayIntToString(int[] args)
     //    {
     //        List<string> vr = new string[args.Length];
     //        for (int i = 0; i < args.Length; i++)
@@ -617,7 +617,7 @@ internal class BTS
     //    }
     #endregion
     #region Casting to List
-    internal static List<int> CastToIntList<U>(IList<U> d)
+    public static List<int> CastToIntList<U>(IList<U> d)
     {
         return CAToNumber.ToNumber(int.Parse, d);
     }
@@ -626,7 +626,7 @@ internal class BTS
     ///     Before use you can call RemoveNotNumber to avoid raise exception
     /// </summary>
     /// <param name="p"></param>
-    internal static List<int> CastCollectionStringToInt(IList<string> p)
+    public static List<int> CastCollectionStringToInt(IList<string> p)
     {
         return CAToNumber.ToNumber(int.Parse, p);
     }
@@ -634,7 +634,7 @@ internal class BTS
     ///     Direct edit
     /// </summary>
     /// <param name="input"></param>
-    internal static void RemoveNotNumber(IList input)
+    public static void RemoveNotNumber(IList input)
     {
         for (var i = input.Count - 1; i >= 0; i--)
             if (!double.TryParse(input[i].ToString(), out var _))
@@ -644,13 +644,13 @@ internal class BTS
     ///     Before use you can call RemoveNotNumber to avoid raise exception
     /// </summary>
     /// <param name="n"></param>
-    internal static List<int> CastCollectionShortToInt(List<short> n)
+    public static List<int> CastCollectionShortToInt(List<short> n)
     {
         var vr = new List<int>();
         for (var i = 0; i < n.Count; i++) vr.Add(n[i]);
         return vr;
     }
-    internal static List<short> CastCollectionIntToShort(List<int> n)
+    public static List<short> CastCollectionIntToShort(List<int> n)
     {
         var vr = new List<short>(n.Count);
         for (var i = 0; i < n.Count; i++) vr.Add((short)n[i]);
@@ -659,13 +659,13 @@ internal class BTS
     /// <summary>
     ///     Before use you can call RemoveNotNumber to avoid raise exception
     /// </summary>
-    internal static List<int> CastListShortToListInt(List<short> n)
+    public static List<int> CastListShortToListInt(List<short> n)
     {
         return CastCollectionShortToInt(n);
     }
     #endregion
     #region MakeUpTo*NumbersToZero
-    internal static object MakeUpTo3NumbersToZero(int p)
+    public static object MakeUpTo3NumbersToZero(int p)
     {
         var d = p.ToString().Length;
         if (d == 1)
@@ -673,7 +673,7 @@ internal class BTS
         if (d == 2) return "00" + p;
         return p;
     }
-    internal static object MakeUpTo2NumbersToZero(int p)
+    public static object MakeUpTo2NumbersToZero(int p)
     {
         if (p.ToString().Length == 1) return "0" + p;
         return p;
@@ -685,7 +685,7 @@ internal class BTS
     ///     Produkuje formát standardní s metodou DateTime.ToString()
     /// </summary>
     /// <param name="dateTime"></param>
-    internal static string SameLenghtAllDateTimes(DateTime dateTime)
+    public static string SameLenghtAllDateTimes(DateTime dateTime)
     {
         var year = dateTime.Year.ToString();
         var month = dateTime.Month.ToString("D2");
@@ -696,7 +696,7 @@ internal class BTS
         return day + "." + month + "." + year + " " + hour + ":" +
                minutes + ":" + seconds; // +":" + miliseconds;
     }
-    internal static string SameLenghtAllDates(DateTime dateTime)
+    public static string SameLenghtAllDates(DateTime dateTime)
     {
         var year = dateTime.Year.ToString();
         var month = dateTime.Month.ToString("D2");
@@ -705,19 +705,19 @@ internal class BTS
             day + "." + month + "." +
             year; // +"" + hour + ":" + minutes + ":" + seconds;// +":" + miliseconds;
     }
-    internal static string SameLenghtAllTimes(DateTime dateTime)
+    public static string SameLenghtAllTimes(DateTime dateTime)
     {
         var hour = dateTime.Hour.ToString("D2");
         var minutes = dateTime.Minute.ToString("D2");
         var seconds = dateTime.Second.ToString("D2");
         return hour + ":" + minutes + ":" + seconds; // +":" + miliseconds;
     }
-    internal static string UsaDateTimeToString(DateTime d)
+    public static string UsaDateTimeToString(DateTime d)
     {
         return d.Month + "/" + d.Day + "/" + d.Year + " " + d.Hour +
                ":" + d.Minute + ":" + d.Second; // +":" + miliseconds;
     }
-    internal static bool EqualDateWithoutTime(DateTime dt1, DateTime dt2)
+    public static bool EqualDateWithoutTime(DateTime dt1, DateTime dt2)
     {
         if (dt1.Day == dt2.Day && dt1.Month == dt2.Month && dt1.Year == dt2.Year) return true;
         return false;
@@ -727,14 +727,14 @@ internal class BTS
     /// <param name="from"></param>
     /// <param name="max"></param>
     /// <param name="postfix"></param>
-    internal static string[] GetNumberedListFromTo(int from, int max)
+    public static string[] GetNumberedListFromTo(int from, int max)
     {
         max++;
         var vr = new List<string>();
         for (var i = from; i < max; i++) vr.Add(i.ToString());
         return vr.ToArray();
     }
-    internal static List<string> GetNumberedListFromTo(int p, int max, string postfix = ". ")
+    public static List<string> GetNumberedListFromTo(int p, int max, string postfix = ". ")
     {
         max++;
         max += p;
