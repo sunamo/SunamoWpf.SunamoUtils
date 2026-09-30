@@ -392,9 +392,10 @@ public partial class ThrowEx
         StringContainsUnAllowedSubstrings(v1, v2);
     }
 
+    /// <summary>Vyhodi vyjimku, ze soubor fnOri ma priponu, kterou nelze zparsovat jako obrazek.</summary>
     public static void FileHasExtensionNotParseableToImageFormat(string fnOri)
     {
-        throw new NotImplementedException();
+        FileHasExtensionNotParseAbleToImageFormat(fnOri);
     }
     #endregion
     #endregion
