@@ -386,9 +386,10 @@ public partial class ThrowEx
         return ThrowIsNotNull(exc);
     }
 
+    /// <summary>Vyhodi vyjimku, pokud text v1 obsahuje nepovoleny podretezec v2.</summary>
     public static void StringContainsUnallowedSubstrings(string v1, string v2)
     {
-        throw new NotImplementedException();
+        StringContainsUnAllowedSubstrings(v1, v2);
     }
 
     public static void FileHasExtensionNotParseableToImageFormat(string fnOri)
