@@ -1,7 +1,7 @@
 namespace SunamoWpf._sunamo;
 
-internal class LoginData
+public class LoginData
 {
-    internal string Login;
-    internal string Pw;
+    public string Login;
+    public string Pw;
 }

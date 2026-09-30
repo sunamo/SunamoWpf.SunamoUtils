@@ -1,8 +1,8 @@
 namespace SunamoWpf._sunamo;
 
-internal class EnumHelper
+public class EnumHelper
 {
-    internal static List<T> GetValues<T>(bool IncludeNope, bool IncludeShared)
+    public static List<T> GetValues<T>(bool IncludeNope, bool IncludeShared)
         where T : struct
     {
         var type = typeof(T);
@@ -29,7 +29,7 @@ internal class EnumHelper
         return values;
     }
 
-    internal static T Parse<T>(string web, T _def, bool returnDefIfNull = false)
+    public static T Parse<T>(string web, T _def, bool returnDefIfNull = false)
        where T : struct
     {
         if (returnDefIfNull) return _def;
