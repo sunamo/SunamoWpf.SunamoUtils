@@ -1,10 +1,10 @@
 namespace SunamoWpf._sunamo;
 
-internal class Translate
+public class Translate
 {
 
 
-    internal static string FromKey(object allOfTheInputsMustBeFilled)
+    public static string FromKey(object allOfTheInputsMustBeFilled)
     {
         return allOfTheInputsMustBeFilled.ToString();
     }

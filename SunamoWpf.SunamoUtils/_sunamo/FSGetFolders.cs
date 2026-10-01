@@ -1,8 +1,8 @@
 namespace SunamoWpf._sunamo;
 
-internal class FSGetFolders
+public class FSGetFolders
 {
-    internal static List<string> GetFoldersEveryFolder(ILogger logger, string fi, string v, SearchOption topDirectoryOnly)
+    public static List<string> GetFoldersEveryFolder(ILogger logger, string fi, string v, SearchOption topDirectoryOnly)
     {
         try
         {
@@ -14,7 +14,7 @@ internal class FSGetFolders
             return new List<string>();
         }
     }
-    internal static List<string> GetFoldersEveryFolder(ILogger logger, string folder)
+    public static List<string> GetFoldersEveryFolder(ILogger logger, string folder)
     {
         return GetFoldersEveryFolder(logger, folder, "*", SearchOption.TopDirectoryOnly);
     }

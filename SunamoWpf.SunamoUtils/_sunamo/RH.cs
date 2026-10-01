@@ -1,8 +1,8 @@
 namespace SunamoWpf._sunamo;
 
-internal class RH
+public class RH
 {
-    internal static Assembly AssemblyWithName(string name)
+    public static Assembly AssemblyWithName(string name)
     {
         try
         {
@@ -84,15 +84,15 @@ internal class RH
             throw;
         }
     }
-    internal static string DumpAsString(DumpAsStringArgs dumpAsStringArgs)
+    public static string DumpAsString(DumpAsStringArgs dumpAsStringArgs)
     {
         return ObjectDumper.Dump(dumpAsStringArgs.o);
     }
-    internal static string FullPathCodeEntity(Type t)
+    public static string FullPathCodeEntity(Type t)
     {
         return t.Namespace + "." + t.Name;
     }
-    internal static object GetValueOfPropertyOrField(object o, string name)
+    public static object GetValueOfPropertyOrField(object o, string name)
     {
         var type = o.GetType();
 
@@ -102,20 +102,20 @@ internal class RH
 
         return value;
     }
-    internal static object GetValueOfField(string name, Type type, object instance, bool ignoreCase)
+    public static object GetValueOfField(string name, Type type, object instance, bool ignoreCase)
     {
         var pis = type.GetFields();
 
         return GetValue(name, type, instance, pis, ignoreCase, null);
     }
 
-    internal static object GetValueOfProperty(string name, Type type, object instance, bool ignoreCase)
+    public static object GetValueOfProperty(string name, Type type, object instance, bool ignoreCase)
     {
         var pis = type.GetProperties();
         return GetValue(name, type, instance, pis, ignoreCase, null);
     }
 
-    internal static object GetValue(string name, Type type, object instance, IList pis, bool ignoreCase, object v)
+    public static object GetValue(string name, Type type, object instance, IList pis, bool ignoreCase, object v)
     {
         return GetOrSetValue(name, type, instance, pis, ignoreCase, GetValue, v);
     }
@@ -136,7 +136,7 @@ internal class RH
         return null;
     }
 
-    internal static object GetOrSetValue(string name, Type type, object instance, IList pis, bool ignoreCase,
+    public static object GetOrSetValue(string name, Type type, object instance, IList pis, bool ignoreCase,
         Func<object, MemberInfo[], object, object> getOrSet, object v)
     {
         if (ignoreCase)
@@ -164,7 +164,7 @@ internal class RH
         return null;
     }
 
-    internal static bool IsOrIsDeriveFromBaseClass(Type children, Type parent, bool a1CanBeString = true)
+    public static bool IsOrIsDeriveFromBaseClass(Type children, Type parent, bool a1CanBeString = true)
     {
         if (children == typeof(string) && !a1CanBeString) return false;
         if (children == null) ThrowEx.IsNull("children", children);

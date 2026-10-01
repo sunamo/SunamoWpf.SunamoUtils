@@ -1,6 +1,6 @@
-namespace SunamoWpf._sunamo;
+﻿namespace SunamoWpf._sunamo;
 
-internal class SH
+public class SH
 {
     private static bool IsInFirstXCharsTheseLetters(string p, int pl, params char[] letters)
     {
@@ -55,27 +55,27 @@ internal class SH
         return p;
     }
 
-    internal static string ShortForLettersCount(string p, int p_2)
+    public static string ShortForLettersCount(string p, int p_2)
     {
         var pridatTriTecky = false;
         return ShortForLettersCount(p, p_2, out pridatTriTecky);
     }
 
-    internal static bool Contains(string fileFullPath, string key)
+    public static bool Contains(string fileFullPath, string key)
     {
         return fileFullPath.Contains(key);
     }
-    internal static int CountLines(string text)
+    public static int CountLines(string text)
     {
         return Regex.Matches(text, Environment.NewLine).Count;
     }
-    internal static string DetectNewline(string s)
+    public static string DetectNewline(string s)
     {
         if (s.Contains("\r\n")) return "\r\n";
         return "\n";
     }
 
-    internal static string GetLastPartByString(string input, string returnFromString)
+    public static string GetLastPartByString(string input, string returnFromString)
     {
         var dex = input.LastIndexOf(returnFromString);
         if (dex == -1) return input;
@@ -84,13 +84,13 @@ internal class SH
         return input;
     }
 
-    internal static void GetPartsByLocation(out string pred, out string za, string text, char or)
+    public static void GetPartsByLocation(out string pred, out string za, string text, char or)
     {
         var dex = text.IndexOf(or);
         GetPartsByLocation(out pred, out za, text, dex);
     }
 
-    internal static void GetPartsByLocation(out string pred, out string za, string text, int pozice)
+    public static void GetPartsByLocation(out string pred, out string za, string text, int pozice)
     {
         if (pozice == -1)
         {
@@ -107,7 +107,7 @@ internal class SH
         }
     }
 
-    internal static string ListToString(object value, string delimiter = null)
+    public static string ListToString(object value, string delimiter = null)
     {
         if (value == null) return "(null)";
 
@@ -138,7 +138,7 @@ internal class SH
         return text;
     }
 
-    internal static string PostfixIfNotEmpty(string text, string postfix)
+    public static string PostfixIfNotEmpty(string text, string postfix)
     {
         if (text.Length != 0)
             if (!text.EndsWith(postfix))
@@ -146,7 +146,7 @@ internal class SH
         return text;
     }
 
-    internal static string PrefixIfNotStartedWith(string item, string http, bool skipWhitespaces = false)
+    public static string PrefixIfNotStartedWith(string item, string http, bool skipWhitespaces = false)
     {
         string whitespaces = string.Empty;
 
@@ -164,7 +164,7 @@ internal class SH
         return whitespaces + item;
     }
 
-    internal static string WhiteSpaceFromStart(string v)
+    public static string WhiteSpaceFromStart(string v)
     {
         StringBuilder sb = new StringBuilder();
         foreach (var item in v)
@@ -181,7 +181,7 @@ internal class SH
         return sb.ToString();
     }
 
-    internal static bool RemovePrefix(ref string s, string v)
+    public static bool RemovePrefix(ref string s, string v)
     {
         if (s.StartsWith(v))
         {
@@ -191,7 +191,7 @@ internal class SH
         return false;
     }
 
-    internal static string TextAfter(string item, string after)
+    public static string TextAfter(string item, string after)
     {
         var dex = item.IndexOf(after);
         if (dex != -1) return item.Substring(dex + after.Length);

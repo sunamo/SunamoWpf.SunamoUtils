@@ -1,8 +1,8 @@
 namespace SunamoWpf._sunamo;
 
-internal class TF
+public class TF
 {
-    internal static
+    public static
 #if ASYNC
         async Task
 #else
@@ -16,17 +16,17 @@ void
             File.AppendAllTextAsync(sf, content);
     }
 
-    internal static async Task<string?> ReadAllText(string f)
+    public static async Task<string?> ReadAllText(string f)
     {
         return await File.ReadAllTextAsync(f);
     }
 
-    internal static async Task WriteAllLines(string item2, List<string> l)
+    public static async Task WriteAllLines(string item2, List<string> l)
     {
         await File.WriteAllLinesAsync(item2, l);
     }
 
-    internal static async Task WriteAllText(string csProj, string c)
+    public static async Task WriteAllText(string csProj, string c)
     {
         await File.WriteAllTextAsync(csProj, c);
     }

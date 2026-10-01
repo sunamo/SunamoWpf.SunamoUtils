@@ -1,6 +1,9 @@
 namespace SunamoWpf._sunamo;
 
-internal class RA
+/// <summary>
+/// </summary>
+[System.Runtime.Versioning.SupportedOSPlatform("windows")]
+public class RA
 {
     protected static List<string> valuesInKey;
     protected static RegistryKey m;
@@ -11,7 +14,7 @@ internal class RA
     /// EN: Initialize registry access with application name
     /// CZ: Inicializuje přístup do registru s názvem aplikace
     /// </summary>
-    internal static void Initialize(string applicationName)
+    public static void Initialize(string applicationName)
     {
         lock (_lock)
         {
@@ -39,15 +42,15 @@ internal class RA
     ///     pokud chces ji volat ihned pri vytvoreni staticke instance nebo ji chces treba volat v F1.
     ///     Trida vraci string aby jsi ji mohl inicializovat treba A1.
     /// </summary>
-    internal virtual string CreateDefaultValues()
+    public virtual string CreateDefaultValues()
     {
         return "";
     }
-    internal static void WriteToKeyInt(string klic, int hodnota)
+    public static void WriteToKeyInt(string klic, int hodnota)
     {
         m.SetValue(klic, hodnota, RegistryValueKind.DWord);
     }
-    internal static int ReturnValueInt(string klic)
+    public static int ReturnValueInt(string klic)
     {
         int c;
         var o = m.GetValue(klic);
@@ -60,27 +63,27 @@ internal class RA
     ///     Pokud klk A1 nebude nalezen, G "".
     /// </summary>
     /// <param name="Login"></param>
-    internal static string ReturnValueString(string Login)
+    public static string ReturnValueString(string Login)
     {
         return m.GetValue(Login, "", RegistryValueOptions.None).ToString();
     }
-    internal static void WriteToKeyString(string klic, string hodnota)
+    public static void WriteToKeyString(string klic, string hodnota)
     {
         m.SetValue(klic, hodnota, RegistryValueKind.String);
     }
-    internal static byte[] ReturnValueByteArray(string Login)
+    public static byte[] ReturnValueByteArray(string Login)
     {
         return (byte[])m.GetValue(Login, null, RegistryValueOptions.None);
     }
-    internal static void WriteToKeyByteArray(string klic, byte[] hodnota)
+    public static void WriteToKeyByteArray(string klic, byte[] hodnota)
     {
         m.SetValue(klic, hodnota, RegistryValueKind.Binary);
     }
-    internal static void SaveToKeyBool(string klic, object hodnota)
+    public static void SaveToKeyBool(string klic, object hodnota)
     {
         m.SetValue(klic, hodnota.ToString(), RegistryValueKind.String);
     }
-    internal static bool ReturnValueBool(string klic)
+    public static bool ReturnValueBool(string klic)
     {
         var s = m.GetValue(klic, "").ToString();
         if (s == "True") return true;
