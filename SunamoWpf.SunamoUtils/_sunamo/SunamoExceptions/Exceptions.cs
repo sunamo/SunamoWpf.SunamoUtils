@@ -24,23 +24,23 @@ internal sealed partial class Exceptions
         }
         return null;
     }
-    internal static string TextOfExceptions(Exception ex)
+    internal static string TextOfExceptions(Exception exception)
     {
-        return ex.GetAllMessages();
+        return exception.GetAllMessages();
     }
     internal static Tuple<string, string, string> PlaceOfException(
 bool fillAlsoFirstTwo = true)
     {
-        StackTrace st = new();
-        var v = st.ToString();
-        var l = v.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries).ToList();
-        l.RemoveAt(0);
-        var i = 0;
+        StackTrace stackTrace = new();
+        var stackTraceText = stackTrace.ToString();
+        var lines = stackTraceText.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries).ToList();
+        lines.RemoveAt(0);
+        var index = 0;
         string type = string.Empty;
         string methodName = string.Empty;
-        for (; i < l.Count; i++)
+        for (; index < lines.Count; index++)
         {
-            var item = l[i];
+            var item = lines[index];
             if (fillAlsoFirstTwo)
                 if (!item.StartsWith("   at ThrowEx"))
                 {
@@ -49,26 +49,26 @@ bool fillAlsoFirstTwo = true)
                 }
             if (item.StartsWith("at System."))
             {
-                l.Add(string.Empty);
-                l.Add(string.Empty);
+                lines.Add(string.Empty);
+                lines.Add(string.Empty);
                 break;
             }
         }
-        return new Tuple<string, string, string>(type, methodName, string.Join(Environment.NewLine, l));
+        return new Tuple<string, string, string>(type, methodName, string.Join(Environment.NewLine, lines));
     }
-    internal static void TypeAndMethodName(string l, out string type, out string methodName)
+    internal static void TypeAndMethodName(string line, out string type, out string methodName)
     {
-        var s2 = l.Split("at ")[1].Trim();
-        var s = s2.Split("(")[0];
-        var p = s.Split(new char[] { '.' }, StringSplitOptions.RemoveEmptyEntries).ToList();
-        methodName = p[^1];
-        p.RemoveAt(p.Count - 1);
-        type = string.Join(".", p);
+        var afterAt = line.Split("at ")[1].Trim();
+        var signature = afterAt.Split("(")[0];
+        var parts = signature.Split(new char[] { '.' }, StringSplitOptions.RemoveEmptyEntries).ToList();
+        methodName = parts[^1];
+        parts.RemoveAt(parts.Count - 1);
+        type = string.Join(".", parts);
     }
-    internal static string CallingMethod(int v = 1)
+    internal static string CallingMethod(int frameIndex = 1)
     {
         StackTrace stackTrace = new();
-        var methodBase = stackTrace.GetFrame(v)?.GetMethod();
+        var methodBase = stackTrace.GetFrame(frameIndex)?.GetMethod();
         if (methodBase == null)
         {
             return "Method name cannot be get";
@@ -136,9 +136,9 @@ bool fillAlsoFirstTwo = true)
         return CheckBefore(before) +
         $"Loading uri {address} failed {times} ({timeoutInMs} ms timeout) HTTP Error: {sharedAlgorithmslastError}";
     }
-    internal static string? NotValidXml(string before, string path, Exception ex)
+    internal static string? NotValidXml(string before, string path, Exception exception)
     {
-        return CheckBefore(before) + path + " is not valid xml. " + TextOfExceptions(ex);
+        return CheckBefore(before) + path + " is not valid xml. " + TextOfExceptions(exception);
     }
     internal static string? IsNotAllowed(string before, string what)
     {
@@ -229,24 +229,24 @@ bool fillAlsoFirstTwo = true)
     {
         return CheckBefore(before) + message;
     }
-    internal static string? FolderCannotBeDeleted(string before, string folder, Exception ex)
+    internal static string? FolderCannotBeDeleted(string before, string folder, Exception exception)
     {
-        return CheckBefore(before) + $"{folder} cannot be deleted, another info: " + TextOfExceptions(ex);
+        return CheckBefore(before) + $"{folder} cannot be deleted, another info: " + TextOfExceptions(exception);
     }
     internal static string? CannotCreateDateTime(string before, int year, int month, int day, int hour, int minute, int seconds,
-Exception ex)
+Exception exception)
     {
         return CheckBefore(before) +
         $"Cannot create DateTime with: year: {year} month: {month} day: {day} hour: {hour} minute: {minute} seconds: {seconds} " +
-        TextOfExceptions(ex);
+        TextOfExceptions(exception);
     }
-    internal static string? CannotMoveFolder(string before, string item, string nova, Exception ex)
+    internal static string? CannotMoveFolder(string before, string item, string nova, Exception exception)
     {
-        return CheckBefore(before) + $"Cannot move folder from {item} to {nova} " + TextOfExceptions(ex);
+        return CheckBefore(before) + $"Cannot move folder from {item} to {nova} " + TextOfExceptions(exception);
     }
-    internal static string? ExcAsArg(string before, Exception ex, string message)
+    internal static string? ExcAsArg(string before, Exception exception, string message)
     {
-        return CheckBefore(before) + message + string.Empty + TextOfExceptions(ex);
+        return CheckBefore(before) + message + string.Empty + TextOfExceptions(exception);
     }
     internal static string? NotImplementedMethod(string before)
     {
@@ -295,10 +295,10 @@ Exception ex)
     {
         if (IsLockedByBitLocker != null)
         {
-            var p = path[0];
-            if (IsLockedByBitLocker(p))
+            var firstChar = path[0];
+            if (IsLockedByBitLocker(firstChar))
             {
-                return CheckBefore(before) + $"Drive {p}:\\ is locked by BitLocker";
+                return CheckBefore(before) + $"Drive {firstChar}:\\ is locked by BitLocker";
             }
         }
         return null;
@@ -318,8 +318,8 @@ Exception ex)
     internal static string? WrongNumberOfElements<T>(string before, int requireElements, string nameCollection,
     IEnumerable<T> collection)
     {
-        var c = collection.Count();
-        return c != requireElements ? CheckBefore(before) + $" {nameCollection} has {c}, it's required {requireElements}" : null;
+        var count = collection.Count();
+        return count != requireElements ? CheckBefore(before) + $" {nameCollection} has {count}, it's required {requireElements}" : null;
     }
     internal static string? DirectoryWasntFound(string before, string directory)
     {
@@ -328,9 +328,9 @@ Exception ex)
         " wasn't found."
         : null;
     }
-    internal static string? PassedListInsteadOfArray<T>(string before, string variableName, IEnumerable<T> v2, Func<IEnumerable<T>, bool> CA_IsListStringWrappedInArray)
+    internal static string? PassedListInsteadOfArray<T>(string before, string variableName, IEnumerable<T> values, Func<IEnumerable<T>, bool> CA_IsListStringWrappedInArray)
     {
-        if (CA_IsListStringWrappedInArray(v2))
+        if (CA_IsListStringWrappedInArray(values))
             return CheckBefore(before) + $" {variableName} is IEnumerable<string>, was passed IEnumerable<string> into params";
         return null;
     }
@@ -357,9 +357,9 @@ Exception ex)
     {
         var first = elements[0].Count;
         List<int> wrongCount = [];
-        for (var i = 1; i < elements.Count; i++)
-            if (first != elements[i].Count)
-                wrongCount.Add(i);
+        for (var index = 1; index < elements.Count; index++)
+            if (first != elements[index].Count)
+                wrongCount.Add(index);
         return wrongCount.Count > 0
         ? CheckBefore(before) + $"Elements {string.Join(',', wrongCount)} have different count than 0 (first)"
         : null;
@@ -370,10 +370,10 @@ Exception ex)
         ? null
         : CheckBefore(before) + " " + "does not exists" + ": " + fulLPath;
     }
-    internal static string? CheckBackslashEnd(string before, string r)
+    internal static string? CheckBackslashEnd(string before, string path)
     {
-        if (r.Length != 0)
-            if (r[^1] != '\\')
+        if (path.Length != 0)
+            if (path[^1] != '\\')
                 return CheckBefore(before) + " string has not been in path format" + "!";
         return null;
     }
@@ -384,7 +384,7 @@ Exception ex)
     internal static string? ArrayElementContainsUnallowedStrings(string before, string arrayName, int dex,
     string valueElement, params string[] unallowedStrings)
     {
-        var foundedUnallowed = unallowedStrings.Where(d => valueElement.Contains(d)).ToList();
+        var foundedUnallowed = unallowedStrings.Where(item => valueElement.Contains(item)).ToList();
         return foundedUnallowed.Count != 0
         ? CheckBefore(before) + "Element of" + " " + arrayName + " on index " + dex +
         " with value " + valueElement + " contains unallowed string(" + foundedUnallowed.Count + "): " +
@@ -416,9 +416,9 @@ Exception ex)
     {
         return folders.Count == 0 ? CheckBefore(before) + "No passed folder into" : null;
     }
-    internal static string? FileSystemException(string v, Exception ex)
+    internal static string? FileSystemException(string text, Exception exception)
     {
-        return ex != null ? CheckBefore(v) + " " + TextOfExceptions(ex) : null;
+        return exception != null ? CheckBefore(text) + " " + TextOfExceptions(exception) : null;
     }
     internal static string? InvalidParameter(string before, string valueVar, string nameVar)
     {
@@ -460,16 +460,16 @@ Exception ex)
     }
     internal static string? NotImplementedCase(string before, object notImplementedName)
     {
-        var fr = string.Empty;
+        var suffix = string.Empty;
         if (notImplementedName != null)
         {
-            fr = " for ";
+            suffix = " for ";
             if (notImplementedName.GetType() == typeof(Type))
-                fr += ((Type)notImplementedName).FullName;
+                suffix += ((Type)notImplementedName).FullName;
             else
-                fr += notImplementedName.ToString();
+                suffix += notImplementedName.ToString();
         }
-        return CheckBefore(before) + "Not implemented case" + fr + " . internal program error. Please contact developer" +
+        return CheckBefore(before) + "Not implemented case" + suffix + " . internal program error. Please contact developer" +
         ".";
     }
     internal static string? NotContains(string before, string originalText, params string[] shouldContains)
@@ -530,14 +530,14 @@ Exception ex)
             string.Concat(namesc + "-" + countsc);
         return null;
     }
-    internal static string? FirstLetterIsNotUpper(string before, string p)
+    internal static string? FirstLetterIsNotUpper(string before, string text)
     {
-        return p.Length == 0 ? null :
-        char.IsLower(p[0]) ? CheckBefore(before) + "First letter is not upper: " + p : null;
+        return text.Length == 0 ? null :
+        char.IsLower(text[0]) ? CheckBefore(before) + "First letter is not upper: " + text : null;
     }
-    internal static string? KeyNotFound<T, U>(string before, IDictionary<T, U> en, string dictName, T key)
+    internal static string? KeyNotFound<T, U>(string before, IDictionary<T, U> dictionary, string dictName, T key)
     {
-        return !en.ContainsKey(key)
+        return !dictionary.ContainsKey(key)
         ? CheckBefore(before) + key + " is not exists in dictionary" + " " + dictName
         : null;
     }
@@ -555,14 +555,14 @@ Exception ex)
         ? CheckBefore(before) + $"{list.Count} elements in {nameOfVariable} which is zero or more than one"
         : null;
     }
-    internal static string? IsNotPositiveNumber(string before, string nameOfVariable, int? n)
+    internal static string? IsNotPositiveNumber(string before, string nameOfVariable, int? number)
     {
-        return !n.HasValue ? CheckBefore(before) + nameOfVariable + " is not int" :
-        n.Value > 0 ? null : CheckBefore(before) + nameOfVariable + " is int but not > 0";
+        return !number.HasValue ? CheckBefore(before) + nameOfVariable + " is not int" :
+        number.Value > 0 ? null : CheckBefore(before) + nameOfVariable + " is int but not > 0";
     }
-    internal static string? CheckBackSlashEnd(string before, string r)
+    internal static string? CheckBackSlashEnd(string before, string path)
     {
-        if (!r.EndsWith('\\')) return CheckBefore(before) + " " + r + " don't end with \\";
+        if (!path.EndsWith('\\')) return CheckBefore(before) + " " + path + " don't end with \\";
         return null;
     }
     internal static string? FolderDoesNotExists(string before, string folder, string additionalInfo)

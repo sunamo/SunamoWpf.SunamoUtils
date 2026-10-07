@@ -2,13 +2,13 @@ namespace SunamoWpf._sunamo;
 
 internal class SHReplace
 {
-    internal static string ReplaceFirstOccurences(string text, string co, string zaCo)
+    internal static string ReplaceFirstOccurences(string text, string oldValue, string zaCo)
     {
-        var fi = text.IndexOf(co);
-        if (fi != -1)
+        var firstIndex = text.IndexOf(oldValue);
+        if (firstIndex != -1)
         {
-            text = ReplaceOnce(text, co, zaCo);
-            text = text.Insert(fi, zaCo);
+            text = ReplaceOnce(text, oldValue, zaCo);
+            text = text.Insert(firstIndex, zaCo);
         }
 
         return text;

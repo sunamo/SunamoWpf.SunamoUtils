@@ -11,9 +11,9 @@ public class RandomHelper
     private static readonly float s_lightColorBase = 256 - 229;
     private static readonly Random s_rnd = new(Guid.NewGuid().GetHashCode());
 
-    public static byte RandomByte(int od, int toInclude)
+    public static byte RandomByte(int min, int toInclude)
     {
-        return (byte)s_rnd.Next(od, toInclude + 1);
+        return (byte)s_rnd.Next(min, toInclude + 1);
     }
 
     public static T RandomEnum<T>()
@@ -29,22 +29,22 @@ public class RandomHelper
         return RandomFloat(1, 0);
     }
 
-    public static float RandomFloat(int p, int maxP)
+    public static float RandomFloat(int min, int maxP)
     {
 
 
         Random random = new Random();
-        double rozsah = maxP - p;
-        double nahodneDouble = random.NextDouble() * rozsah + p;
+        double rozsah = maxP - min;
+        double nahodneDouble = random.NextDouble() * rozsah + min;
         return (float)nahodneDouble;
     }
     public static byte RandomColorPart(bool light, float add)
     {
         if (light)
         {
-            var r = RandomFloatBetween0And1();
-            r *= s_lightColorBase;
-            return (byte)(r + add);
+            var randomValue = RandomFloatBetween0And1();
+            randomValue *= s_lightColorBase;
+            return (byte)(randomValue + add);
         }
 
         return RandomByte(0, 255);

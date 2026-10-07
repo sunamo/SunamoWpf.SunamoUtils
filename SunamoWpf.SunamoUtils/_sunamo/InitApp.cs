@@ -17,12 +17,12 @@ class TemplateLogger
         throw new NotImplementedException();
     }
 
-    internal void MustHaveValue(string v)
+    internal void MustHaveValue(string message)
     {
         throw new NotImplementedException();
     }
 
-    internal void SuccessfullyResized(string v)
+    internal void SuccessfullyResized(string message)
     {
         throw new NotImplementedException();
     }

@@ -22,11 +22,11 @@ public class RA
 
             //HKEY_LOCAL_MACHINE\SOFTWARE
             var hklm = Registry.CurrentUser;
-            var sw = hklm.OpenSubKey("SOFTWARE", true);
-            m = sw.OpenSubKey(applicationName, true);
+            var softwareKey = hklm.OpenSubKey("SOFTWARE", true);
+            m = softwareKey.OpenSubKey(applicationName, true);
             if (m == null)
             {
-                m = sw.CreateSubKey(applicationName);
+                m = softwareKey.CreateSubKey(applicationName);
                 valuesInKey = new List<string>();
             }
             else
@@ -52,11 +52,11 @@ public class RA
     }
     public static int ReturnValueInt(string klic)
     {
-        int c;
-        var o = m.GetValue(klic);
-        if (o != null)
-            if (int.TryParse(o.ToString(), out c))
-                return c;
+        int result;
+        var value = m.GetValue(klic);
+        if (value != null)
+            if (int.TryParse(value.ToString(), out result))
+                return result;
         return -1;
     }
     /// <summary>
@@ -85,8 +85,8 @@ public class RA
     }
     public static bool ReturnValueBool(string klic)
     {
-        var s = m.GetValue(klic, "").ToString();
-        if (s == "True") return true;
+        var text = m.GetValue(klic, "").ToString();
+        if (text == "True") return true;
         return false;
     }
 }

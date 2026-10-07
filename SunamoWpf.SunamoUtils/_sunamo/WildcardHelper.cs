@@ -4,6 +4,6 @@ internal class WildcardHelper
 {
     internal static bool IsWildcard(string text)
     {
-        return text.ToCharArray().Any(d => d == '?') || text.ToCharArray().Any(d => d == '*');
+        return text.ToCharArray().Any(character => character == '?') || text.ToCharArray().Any(symbol => symbol == '*');
     }
 }

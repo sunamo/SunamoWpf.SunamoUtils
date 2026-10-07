@@ -9,11 +9,11 @@ public class PD
     public static Action<string> delShowMb = null;
     public static Action<string> WriteToStartupLogRelease;
 
-    public static void ShowMb(string v)
+    public static void ShowMb(string message)
     {
         if (showMbDebug)
         {
-            delShowMb(v);
+            delShowMb(message);
         }
     }
 

@@ -2,20 +2,20 @@ namespace SunamoWpf._sunamo;
 
 internal class CharHelper
 {
-    internal static string OnlyDigits(string v)
+    internal static string OnlyDigits(string text)
     {
-        return OnlyAccepted(v, char.IsDigit);
+        return OnlyAccepted(text, char.IsDigit);
     }
-    internal static string OnlyAccepted(string v, Func<char, bool> isDigit, bool not = false)
+    internal static string OnlyAccepted(string text, Func<char, bool> isDigit, bool not = false)
     {
-        var sb = new StringBuilder();
+        var stringBuilder = new StringBuilder();
         var result = false;
-        foreach (var item in v)
+        foreach (var item in text)
         {
             result = isDigit.Invoke(item);
             if (not) result = !result;
-            if (result) sb.Append(item);
+            if (result) stringBuilder.Append(item);
         }
-        return sb.ToString();
+        return stringBuilder.ToString();
     }
 }

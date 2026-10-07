@@ -12,14 +12,14 @@ public class SHFormat
         {
             return string.Format(status, args);
         }
-        catch (Exception ex)
+        catch (Exception exception)
         {
-            ThrowEx.ExcAsArg(ex);
+            ThrowEx.ExcAsArg(exception);
             return status;
         }
     }
-    public static string Format4(string v, params Object[] o)
+    public static string Format4(string format, params Object[] args)
     {
-        return string.Format(v, o);
+        return string.Format(format, args);
     }
 }
