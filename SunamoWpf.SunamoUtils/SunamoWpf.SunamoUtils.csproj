@@ -5,7 +5,7 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <RootNamespace>SunamoWpf</RootNamespace>
     <Description>Utility helpers extracted from SunamoWpf (_sunamo layer)</Description>
-    <Version>26.9.30.8</Version>
+    <Version>26.10.7.9</Version>
     <Authors>www.sunamo.cz</Authors>
     <Copyright>www.sunamo.cz</Copyright>
     <PackageProjectUrl>https://sunamo.github.io/PlatformIndependentNuGetPackages/SunamoWpf.SunamoUtils/</PackageProjectUrl>
