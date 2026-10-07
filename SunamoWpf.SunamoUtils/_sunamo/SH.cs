@@ -2,63 +2,63 @@
 
 public class SH
 {
-    private static bool IsInFirstXCharsTheseLetters(string p, int pl, params char[] letters)
+    private static bool IsInFirstXCharsTheseLetters(string text, int count, params char[] letters)
     {
-        for (var i = 0; i < pl; i++)
+        for (var index = 0; index < count; index++)
             foreach (var item in letters)
-                if (p[i] == item)
+                if (text[index] == item)
                     return true;
         return false;
     }
 
-    private static string ShortForLettersCount(string p, int p_2, out bool pridatTriTecky)
+    private static string ShortForLettersCount(string text, int p_2, out bool pridatTriTecky)
     {
         pridatTriTecky = false;
         // Vše tu funguje výborně
-        p = p.Trim();
-        var pl = p.Length;
-        var jeDelsiA1 = p_2 <= pl;
+        text = text.Trim();
+        var length = text.Length;
+        var jeDelsiA1 = p_2 <= length;
 
 
         if (jeDelsiA1)
         {
-            if (IsInFirstXCharsTheseLetters(p, p_2, ' '))
+            if (IsInFirstXCharsTheseLetters(text, p_2, ' '))
             {
                 var dexMezery = 0;
-                var d = p; //p.Substring(p.Length - zkratitO);
-                var to = d.Length;
+                var candidate = text; //p.Substring(p.Length - zkratitO);
+                var end = candidate.Length;
 
                 var napocitano = 0;
-                for (var i = 0; i < to; i++)
+                for (var index = 0; index < end; index++)
                 {
                     napocitano++;
 
-                    if (d[i] == ' ')
+                    if (candidate[index] == ' ')
                     {
                         if (napocitano >= p_2) break;
 
-                        dexMezery = i;
+                        dexMezery = index;
                     }
                 }
 
-                d = d.Substring(0, dexMezery + 1);
-                if (d.Trim() != "") pridatTriTecky = true;
+                candidate = candidate.Substring(0, dexMezery + 1);
+                if (candidate.Trim() != "") pridatTriTecky = true;
                 //d = d ;
-                return d;
+                return candidate;
                 //}
             }
 
             pridatTriTecky = true;
-            return p.Substring(0, p_2);
+            return text.Substring(0, p_2);
         }
 
-        return p;
+        return text;
     }
 
-    public static string ShortForLettersCount(string p, int p_2)
+    public static string ShortForLettersCount(string text, int p_2)
     {
         var pridatTriTecky = false;
-        return ShortForLettersCount(p, p_2, out pridatTriTecky);
+        return ShortForLettersCount(text, p_2, out pridatTriTecky);
     }
 
     public static bool Contains(string fileFullPath, string key)
@@ -69,9 +69,9 @@ public class SH
     {
         return Regex.Matches(text, Environment.NewLine).Count;
     }
-    public static string DetectNewline(string s)
+    public static string DetectNewline(string text)
     {
-        if (s.Contains("\r\n")) return "\r\n";
+        if (text.Contains("\r\n")) return "\r\n";
         return "\n";
     }
 
@@ -84,26 +84,26 @@ public class SH
         return input;
     }
 
-    public static void GetPartsByLocation(out string pred, out string za, string text, char or)
+    public static void GetPartsByLocation(out string pred, out string rest, string text, char separator)
     {
-        var dex = text.IndexOf(or);
-        GetPartsByLocation(out pred, out za, text, dex);
+        var dex = text.IndexOf(separator);
+        GetPartsByLocation(out pred, out rest, text, dex);
     }
 
-    public static void GetPartsByLocation(out string pred, out string za, string text, int pozice)
+    public static void GetPartsByLocation(out string pred, out string rest, string text, int pozice)
     {
         if (pozice == -1)
         {
             pred = text;
-            za = "";
+            rest = "";
         }
         else
         {
             pred = text.Substring(0, pozice);
             if (text.Length > pozice + 1)
-                za = text.Substring(pozice + 1);
+                rest = text.Substring(pozice + 1);
             else
-                za = string.Empty;
+                rest = string.Empty;
         }
     }
 
@@ -164,28 +164,28 @@ public class SH
         return whitespaces + item;
     }
 
-    public static string WhiteSpaceFromStart(string v)
+    public static string WhiteSpaceFromStart(string text)
     {
-        StringBuilder sb = new StringBuilder();
-        foreach (var item in v)
+        StringBuilder stringBuilder = new StringBuilder();
+        foreach (var item in text)
         {
             if (char.IsWhiteSpace(item))
             {
-                sb.Append(item);
+                stringBuilder.Append(item);
             }
             else
             {
                 break;
             }
         }
-        return sb.ToString();
+        return stringBuilder.ToString();
     }
 
-    public static bool RemovePrefix(ref string s, string v)
+    public static bool RemovePrefix(ref string text, string prefix)
     {
-        if (s.StartsWith(v))
+        if (text.StartsWith(prefix))
         {
-            s = s.Substring(v.Length);
+            text = text.Substring(prefix.Length);
             return true;
         }
         return false;

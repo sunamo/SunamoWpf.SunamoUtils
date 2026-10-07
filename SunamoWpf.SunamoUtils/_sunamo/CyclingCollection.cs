@@ -44,18 +44,18 @@ internal class CyclingCollection<T> //: IStatusBroadcaster
     {
         get
         {
-            T t2 = default;
+            T item = default;
             var dex = Math.Abs(index);
             if (c.Count > dex && c.Count >= dex)
             {
-                t2 = c[dex];
+                item = c[dex];
             }
             else
             {
                 dex = Math.Abs(++index);
                 if (c.Count > dex && c.Count >= dex)
                 {
-                    t2 = c[dex];
+                    item = c[dex];
                 }
                 else
                 {
@@ -63,33 +63,33 @@ internal class CyclingCollection<T> //: IStatusBroadcaster
                     dex = Math.Abs(--index);
                     if (c.Count > dex && c.Count >= dex)
                     {
-                        t2 = c[dex];
+                        item = c[dex];
                     }
                     else
                     {
                         if (c.Count > 0)
-                            t2 = c[0];
+                            item = c[0];
                         else
                             OnNewStatus(xUnableToLoadElementAddSomeAndTryAgain);
                     }
                 }
             }
 
-            return t2;
+            return item;
         }
     }
 
-    internal void Add(T t)
+    internal void Add(T item)
     {
-        c.Add(t);
+        c.Add(item);
         _index++;
         OnChange();
     }
 
-    internal void AddRange(IList<T> k)
+    internal void AddRange(IList<T> items)
     {
         //t.AddRange(k);
-        foreach (var item in k)
+        foreach (var item in items)
         {
             c.Add(item);
             _index++;
@@ -105,41 +105,41 @@ internal class CyclingCollection<T> //: IStatusBroadcaster
         OnChange();
     }
 
-    internal T SetIretation(int ir)
+    internal T SetIretation(int iteration)
     {
-        index = ValidateIndex(ir);
+        index = ValidateIndex(iteration);
         OnChange();
         return GetIretation;
     }
 
-    private int ValidateIndex(int ir)
+    private int ValidateIndex(int iteration)
     {
-        if (ir < 0)
-            ir = c.Count - 1;
-        else if (ir >= c.Count) ir = 0;
+        if (iteration < 0)
+            iteration = c.Count - 1;
+        else if (iteration >= c.Count) iteration = 0;
 
-        return ir;
+        return iteration;
     }
 
-    internal void SetIretationWithoutEvent(int p)
+    internal void SetIretationWithoutEvent(int iteration)
     {
-        index = p;
+        index = iteration;
     }
 
     public override string ToString()
     {
-        var sb = new StringBuilder();
-        sb.Append(ActualIndex + 1);
-        if (_MakesSpaces) sb.Append(" ");
-        sb.Append("/");
-        if (_MakesSpaces) sb.Append(" ");
-        sb.Append(c.Count.ToString());
-        return sb.ToString();
+        var stringBuilder = new StringBuilder();
+        stringBuilder.Append(ActualIndex + 1);
+        if (_MakesSpaces) stringBuilder.Append(" ");
+        stringBuilder.Append("/");
+        if (_MakesSpaces) stringBuilder.Append(" ");
+        stringBuilder.Append(c.Count.ToString());
+        return stringBuilder.ToString();
     }
 
-    internal void ReplaceOnce(T p, T nove)
+    internal void ReplaceOnce(T oldItem, T nove)
     {
-        var dex = c.IndexOf(p);
+        var dex = c.IndexOf(oldItem);
         c.RemoveAt(dex);
         c.Insert(dex, nove);
     }
@@ -295,9 +295,9 @@ internal class CyclingCollection<T> //: IStatusBroadcaster
 
     internal event Action<string> NewStatus;
 
-    internal void OnNewStatus(string s, params string[] p)
+    internal void OnNewStatus(string status, params string[] args)
     {
-        if (NewStatus != null) NewStatus(string.Format(s, p));
+        if (NewStatus != null) NewStatus(string.Format(status, args));
     }
 
     #endregion
