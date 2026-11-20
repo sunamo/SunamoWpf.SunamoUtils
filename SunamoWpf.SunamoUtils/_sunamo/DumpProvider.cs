@@ -1,5 +1,8 @@
 namespace SunamoWpf._sunamo;
 
+/// <summary>
+/// Represents the dump provider type.
+/// </summary>
 public enum DumpProvider
 {
     /// <summary>

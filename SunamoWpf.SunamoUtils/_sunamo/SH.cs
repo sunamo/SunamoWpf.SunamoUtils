@@ -1,5 +1,8 @@
 ﻿namespace SunamoWpf._sunamo;
 
+/// <summary>
+/// Represents the SH type.
+/// </summary>
 public class SH
 {
     private static bool IsInFirstXCharsTheseLetters(string text, int count, params char[] letters)
@@ -55,26 +58,54 @@ public class SH
         return text;
     }
 
+    /// <summary>
+    /// Short for letters count.
+    /// </summary>
+    /// <param name="text">The text.</param>
+    /// <param name="p_2">The p 2.</param>
+    /// <returns>The short for letters count result.</returns>
     public static string ShortForLettersCount(string text, int p_2)
     {
         var pridatTriTecky = false;
         return ShortForLettersCount(text, p_2, out pridatTriTecky);
     }
 
+    /// <summary>
+    /// Contains.
+    /// </summary>
+    /// <param name="fileFullPath">The file full path.</param>
+    /// <param name="key">The key.</param>
+    /// <returns>The contains result.</returns>
     public static bool Contains(string fileFullPath, string key)
     {
         return fileFullPath.Contains(key);
     }
+    /// <summary>
+    /// Count lines.
+    /// </summary>
+    /// <param name="text">The text.</param>
+    /// <returns>The count lines result.</returns>
     public static int CountLines(string text)
     {
         return Regex.Matches(text, Environment.NewLine).Count;
     }
+    /// <summary>
+    /// Detect newline.
+    /// </summary>
+    /// <param name="text">The text.</param>
+    /// <returns>The detect newline result.</returns>
     public static string DetectNewline(string text)
     {
         if (text.Contains("\r\n")) return "\r\n";
         return "\n";
     }
 
+    /// <summary>
+    /// Get last part by string.
+    /// </summary>
+    /// <param name="input">The input.</param>
+    /// <param name="returnFromString">The return from string.</param>
+    /// <returns>The get last part by string result.</returns>
     public static string GetLastPartByString(string input, string returnFromString)
     {
         var dex = input.LastIndexOf(returnFromString);
@@ -84,12 +115,26 @@ public class SH
         return input;
     }
 
+    /// <summary>
+    /// Get parts by location.
+    /// </summary>
+    /// <param name="pred">The pred.</param>
+    /// <param name="rest">The rest.</param>
+    /// <param name="text">The text.</param>
+    /// <param name="separator">The separator.</param>
     public static void GetPartsByLocation(out string pred, out string rest, string text, char separator)
     {
         var dex = text.IndexOf(separator);
         GetPartsByLocation(out pred, out rest, text, dex);
     }
 
+    /// <summary>
+    /// Get parts by location.
+    /// </summary>
+    /// <param name="pred">The pred.</param>
+    /// <param name="rest">The rest.</param>
+    /// <param name="text">The text.</param>
+    /// <param name="pozice">The pozice.</param>
     public static void GetPartsByLocation(out string pred, out string rest, string text, int pozice)
     {
         if (pozice == -1)
@@ -107,6 +152,12 @@ public class SH
         }
     }
 
+    /// <summary>
+    /// List to string.
+    /// </summary>
+    /// <param name="value">The value.</param>
+    /// <param name="delimiter">The delimiter.</param>
+    /// <returns>The list to string result.</returns>
     public static string ListToString(object value, string delimiter = null)
     {
         if (value == null) return "(null)";
@@ -138,6 +189,12 @@ public class SH
         return text;
     }
 
+    /// <summary>
+    /// Postfix if not empty.
+    /// </summary>
+    /// <param name="text">The text.</param>
+    /// <param name="postfix">The postfix.</param>
+    /// <returns>The postfix if not empty result.</returns>
     public static string PostfixIfNotEmpty(string text, string postfix)
     {
         if (text.Length != 0)
@@ -146,6 +203,13 @@ public class SH
         return text;
     }
 
+    /// <summary>
+    /// Prefix if not started with.
+    /// </summary>
+    /// <param name="item">The item.</param>
+    /// <param name="http">The http.</param>
+    /// <param name="skipWhitespaces">The skip whitespaces.</param>
+    /// <returns>The prefix if not started with result.</returns>
     public static string PrefixIfNotStartedWith(string item, string http, bool skipWhitespaces = false)
     {
         string whitespaces = string.Empty;
@@ -164,6 +228,11 @@ public class SH
         return whitespaces + item;
     }
 
+    /// <summary>
+    /// White space from start.
+    /// </summary>
+    /// <param name="text">The text.</param>
+    /// <returns>The white space from start result.</returns>
     public static string WhiteSpaceFromStart(string text)
     {
         StringBuilder stringBuilder = new StringBuilder();
@@ -181,6 +250,12 @@ public class SH
         return stringBuilder.ToString();
     }
 
+    /// <summary>
+    /// Remove prefix.
+    /// </summary>
+    /// <param name="text">The text.</param>
+    /// <param name="prefix">The prefix.</param>
+    /// <returns>The remove prefix result.</returns>
     public static bool RemovePrefix(ref string text, string prefix)
     {
         if (text.StartsWith(prefix))
@@ -191,6 +266,12 @@ public class SH
         return false;
     }
 
+    /// <summary>
+    /// Text after.
+    /// </summary>
+    /// <param name="item">The item.</param>
+    /// <param name="after">The after.</param>
+    /// <returns>The text after result.</returns>
     public static string TextAfter(string item, string after)
     {
         var dex = item.IndexOf(after);

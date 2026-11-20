@@ -5,7 +5,13 @@ namespace SunamoWpf._sunamo;
 [System.Runtime.Versioning.SupportedOSPlatform("windows")]
 public class RA
 {
+    /// <summary>
+    /// The values in key.
+    /// </summary>
     protected static List<string> valuesInKey;
+    /// <summary>
+    /// The m.
+    /// </summary>
     protected static RegistryKey m;
     private static bool _initialized = false;
     private static readonly object _lock = new object();
@@ -46,10 +52,20 @@ public class RA
     {
         return "";
     }
+    /// <summary>
+    /// Write to key int.
+    /// </summary>
+    /// <param name="klic">The klic.</param>
+    /// <param name="hodnota">The hodnota.</param>
     public static void WriteToKeyInt(string klic, int hodnota)
     {
         m.SetValue(klic, hodnota, RegistryValueKind.DWord);
     }
+    /// <summary>
+    /// Return value int.
+    /// </summary>
+    /// <param name="klic">The klic.</param>
+    /// <returns>The return value int result.</returns>
     public static int ReturnValueInt(string klic)
     {
         int result;
@@ -67,22 +83,47 @@ public class RA
     {
         return m.GetValue(Login, "", RegistryValueOptions.None).ToString();
     }
+    /// <summary>
+    /// Write to key string.
+    /// </summary>
+    /// <param name="klic">The klic.</param>
+    /// <param name="hodnota">The hodnota.</param>
     public static void WriteToKeyString(string klic, string hodnota)
     {
         m.SetValue(klic, hodnota, RegistryValueKind.String);
     }
+    /// <summary>
+    /// Return value byte array.
+    /// </summary>
+    /// <param name="Login">The login.</param>
+    /// <returns>The return value byte array result.</returns>
     public static byte[] ReturnValueByteArray(string Login)
     {
         return (byte[])m.GetValue(Login, null, RegistryValueOptions.None);
     }
+    /// <summary>
+    /// Write to key byte array.
+    /// </summary>
+    /// <param name="klic">The klic.</param>
+    /// <param name="hodnota">The hodnota.</param>
     public static void WriteToKeyByteArray(string klic, byte[] hodnota)
     {
         m.SetValue(klic, hodnota, RegistryValueKind.Binary);
     }
+    /// <summary>
+    /// Save to key bool.
+    /// </summary>
+    /// <param name="klic">The klic.</param>
+    /// <param name="hodnota">The hodnota.</param>
     public static void SaveToKeyBool(string klic, object hodnota)
     {
         m.SetValue(klic, hodnota.ToString(), RegistryValueKind.String);
     }
+    /// <summary>
+    /// Return value bool.
+    /// </summary>
+    /// <param name="klic">The klic.</param>
+    /// <returns>The return value bool result.</returns>
     public static bool ReturnValueBool(string klic)
     {
         var text = m.GetValue(klic, "").ToString();

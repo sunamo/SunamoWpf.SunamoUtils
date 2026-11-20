@@ -1,5 +1,8 @@
 ﻿namespace SunamoWpf._sunamo;
 
+/// <summary>
+/// Represents the dictionary helper type.
+/// </summary>
 public class DictionaryHelper
 {
     #region AddOrCreate když key i value není list
@@ -127,6 +130,13 @@ public class DictionaryHelper
     }
     #endregion
 
+    /// <summary>
+    /// Add or set t 1 t 2.
+    /// </summary>
+    /// <param name="dictionary">The dictionary.</param>
+    /// <param name="key">The key.</param>
+    /// <param name="value">The value.</param>
+    /// <returns>The add or set t 1 t 2 result.</returns>
     public static void AddOrSet<T1, T2>(IDictionary<T1, T2> dictionary, T1 key, T2 value)
     {
         if (dictionary.ContainsKey(key))
