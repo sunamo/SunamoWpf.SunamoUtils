@@ -1,7 +1,15 @@
 namespace SunamoWpf._sunamo;
 
+/// <summary>
+/// Represents the RH type.
+/// </summary>
 public class RH
 {
+    /// <summary>
+    /// Assembly with name.
+    /// </summary>
+    /// <param name="name">The name.</param>
+    /// <returns>The assembly with name result.</returns>
     public static Assembly AssemblyWithName(string name)
     {
         try
@@ -84,14 +92,30 @@ public class RH
             throw;
         }
     }
+    /// <summary>
+    /// Dump as string.
+    /// </summary>
+    /// <param name="dumpAsStringArgs">The dump as string args.</param>
+    /// <returns>The dump as string result.</returns>
     public static string DumpAsString(DumpAsStringArgs dumpAsStringArgs)
     {
         return ObjectDumper.Dump(dumpAsStringArgs.o);
     }
+    /// <summary>
+    /// Full path code entity.
+    /// </summary>
+    /// <param name="type">The type.</param>
+    /// <returns>The full path code entity result.</returns>
     public static string FullPathCodeEntity(Type type)
     {
         return type.Namespace + "." + type.Name;
     }
+    /// <summary>
+    /// Get value of property or field.
+    /// </summary>
+    /// <param name="instance">The instance.</param>
+    /// <param name="name">The name.</param>
+    /// <returns>The get value of property or field result.</returns>
     public static object GetValueOfPropertyOrField(object instance, string name)
     {
         var type = instance.GetType();
@@ -102,6 +126,14 @@ public class RH
 
         return value;
     }
+    /// <summary>
+    /// Get value of field.
+    /// </summary>
+    /// <param name="name">The name.</param>
+    /// <param name="type">The type.</param>
+    /// <param name="instance">The instance.</param>
+    /// <param name="ignoreCase">The ignore case.</param>
+    /// <returns>The get value of field result.</returns>
     public static object GetValueOfField(string name, Type type, object instance, bool ignoreCase)
     {
         var pis = type.GetFields();
@@ -109,12 +141,30 @@ public class RH
         return GetValue(name, type, instance, pis, ignoreCase, null);
     }
 
+    /// <summary>
+    /// Get value of property.
+    /// </summary>
+    /// <param name="name">The name.</param>
+    /// <param name="type">The type.</param>
+    /// <param name="instance">The instance.</param>
+    /// <param name="ignoreCase">The ignore case.</param>
+    /// <returns>The get value of property result.</returns>
     public static object GetValueOfProperty(string name, Type type, object instance, bool ignoreCase)
     {
         var pis = type.GetProperties();
         return GetValue(name, type, instance, pis, ignoreCase, null);
     }
 
+    /// <summary>
+    /// Get value.
+    /// </summary>
+    /// <param name="name">The name.</param>
+    /// <param name="type">The type.</param>
+    /// <param name="instance">The instance.</param>
+    /// <param name="pis">The pis.</param>
+    /// <param name="ignoreCase">The ignore case.</param>
+    /// <param name="value">The value.</param>
+    /// <returns>The get value result.</returns>
     public static object GetValue(string name, Type type, object instance, IList pis, bool ignoreCase, object value)
     {
         return GetOrSetValue(name, type, instance, pis, ignoreCase, GetValue, value);
@@ -136,6 +186,17 @@ public class RH
         return null;
     }
 
+    /// <summary>
+    /// Get or set value.
+    /// </summary>
+    /// <param name="name">The name.</param>
+    /// <param name="type">The type.</param>
+    /// <param name="instance">The instance.</param>
+    /// <param name="pis">The pis.</param>
+    /// <param name="ignoreCase">The ignore case.</param>
+    /// <param name="getOrSet">The get or set.</param>
+    /// <param name="value">The value.</param>
+    /// <returns>The get or set value result.</returns>
     public static object GetOrSetValue(string name, Type type, object instance, IList pis, bool ignoreCase,
         Func<object, MemberInfo[], object, object> getOrSet, object value)
     {
@@ -164,6 +225,13 @@ public class RH
         return null;
     }
 
+    /// <summary>
+    /// Is or is derive from base class.
+    /// </summary>
+    /// <param name="children">The children.</param>
+    /// <param name="parent">The parent.</param>
+    /// <param name="a1CanBeString">The a 1 can be string.</param>
+    /// <returns>The is or is derive from base class result.</returns>
     public static bool IsOrIsDeriveFromBaseClass(Type children, Type parent, bool a1CanBeString = true)
     {
         if (children == typeof(string) && !a1CanBeString) return false;

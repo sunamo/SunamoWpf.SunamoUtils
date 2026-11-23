@@ -1,27 +1,51 @@
 namespace SunamoWpf._sunamo;
 
+/// <summary>
+/// Represents the SF type.
+/// </summary>
 public static class SF
 {
+    /// <summary>
+    /// The replace for separator string constant.
+    /// </summary>
     public const string replaceForSeparatorString = "_";
     private static readonly SerializeContentArgs s_contentArgs = new();
     private static Type type = typeof(SF);
+    /// <summary>
+    /// The replace for separator char.
+    /// </summary>
     public static readonly char replaceForSeparatorChar = '_';
+    /// <summary>
+    /// The d deli.
+    /// </summary>
     public static string dDeli = "|";
     static SF()
     {
         s_contentArgs.separatorString = "|";
     }
+    /// <summary>
+    /// The separator string.
+    /// </summary>
     public static string separatorString
     {
         get => s_contentArgs.separatorString;
         set => s_contentArgs.separatorString = value;
     }
+    /// <summary>
+    /// Gets the key code separator.
+    /// </summary>
     public static int keyCodeSeparator => s_contentArgs.separatorChar;
     /// <summary>
     ///     Must be property - I can forget change value on three occurences.
     /// </summary>
     public static char separatorChar => s_contentArgs.separatorChar;
     //CASH
+    /// <summary>
+    /// Parse up to required elements line.
+    /// </summary>
+    /// <param name="input">The input.</param>
+    /// <param name="requiredCount">The required count.</param>
+    /// <returns>The parse up to required elements line result.</returns>
     public static List<string> ParseUpToRequiredElementsLine(string input, int requiredCount)
     {
         var elements = GetAllElementsLine(input);
@@ -32,6 +56,11 @@ public static class SF
                 elements.Add(string.Empty);
         return elements;
     }
+    /// <summary>
+    /// To dictionary t 1 t 2.
+    /// </summary>
+    /// <param name="lines">The lines.</param>
+    /// <returns>The to dictionary t 1 t 2 result.</returns>
     public static Dictionary<T1, T2> ToDictionary<T1, T2>(List<List<string>> lines)
     {
         var keyParserObject = BTS.MethodForParse<T1>();
@@ -118,6 +147,13 @@ public static class SF
         lines = lines.Where(entry => !entry.StartsWith("#")).ToList();
         return lines;
     }
+    /// <summary>
+    /// Get all elements file.
+    /// </summary>
+    /// <param name="file/*">The file.</param>
+    /// <param name="firstCommentLine*/">The first comment line.</param>
+    /// <param name="oddelovaciZnak">The oddelovaci znak.</param>
+    /// <returns>The get all elements file result.</returns>
     public static List<List<string>> GetAllElementsFile(string file/*, ref string firstCommentLine*/,
         string oddelovaciZnak = "|")
     {
@@ -132,6 +168,12 @@ public static class SF
         if (header.Count > 0) rows.Insert(0, header);
         return rows;
     }
+        /// <summary>
+        /// Dictionary.
+        /// </summary>
+        /// <param name="file">The file.</param>
+        /// <param name="artists">The artists.</param>
+        /// <returns>The dictionary t 1 t 2 result.</returns>
     public static
 #if ASYNC
         async Task
@@ -147,17 +189,33 @@ public static class SF
 #endif
             File.WriteAllTextAsync(file, stringBuilder.ToString());
     }
+    /// <summary>
+    /// Write all elements to file key value.
+    /// </summary>
+    /// <param name="coolPeopleShortcuts">The cool people shortcuts.</param>
+    /// <param name="dictionary">The dictionary.</param>
+    /// <returns>The write all elements to file key value result.</returns>
     public static void WriteAllElementsToFile<Key, Value>(string coolPeopleShortcuts, Dictionary<Key, Value> dictionary)
     {
         var list = ListFromDictionary(dictionary);
         WriteAllElementsToFile(coolPeopleShortcuts, list).RunSynchronously();
     }
+    /// <summary>
+    /// Write all elements to file.
+    /// </summary>
+    /// <param name="VybranySouborLogu">The vybrany soubor logu.</param>
+    /// <param name="elementLines">The element lines.</param>
     public static async Task WriteAllElementsToFile(string VybranySouborLogu, List<List<string>> elementLines)
     {
         var stringBuilder = new StringBuilder();
         foreach (var item in elementLines) stringBuilder.AppendLine(PrepareToSerialization2(item));
         await File.WriteAllTextAsync(VybranySouborLogu, stringBuilder.ToString());
     }
+    /// <summary>
+    /// List from dictionary key value.
+    /// </summary>
+    /// <param name="dictionary">The dictionary.</param>
+    /// <returns>The list from dictionary key value result.</returns>
     public static List<List<string>> ListFromDictionary<Key, Value>(Dictionary<Key, Value> dictionary)
     {
         var result = new List<List<string>>();
@@ -197,6 +255,11 @@ public static class SF
     {
         return PrepareToSerializationWorker(items, true, separator);
     }
+        /// <summary>
+        /// Dictionary append.
+        /// </summary>
+        /// <param name="path">The path.</param>
+        /// <param name="toSave">The to save.</param>
     public static
 #if ASYNC
         async Task
@@ -227,6 +290,11 @@ public static class SF
         }
         return null;
     }
+        /// <summary>
+        /// Append all text.
+        /// </summary>
+        /// <param name="path">The path.</param>
+        /// <param name="line">The line.</param>
     public static
 #if ASYNC
         async Task<List<List<string>>>
@@ -315,6 +383,11 @@ public static class SF
             if (int.TryParse(lines[0], out delimiterInt)) separatorString = ((char)delimiterInt).ToString();
         }
     }
+    /// <summary>
+    /// Write all elements to file.
+    /// </summary>
+    /// <param name="VybranySouborLogu">The vybrany soubor logu.</param>
+    /// <param name="elementLines">The element lines.</param>
     public static async Task WriteAllElementsToFile(string VybranySouborLogu, List<string>[] elementLines)
     {
         var stringBuilder = new StringBuilder();

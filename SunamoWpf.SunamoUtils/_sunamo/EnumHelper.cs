@@ -1,7 +1,17 @@
 namespace SunamoWpf._sunamo;
 
+/// <summary>
+/// Represents the enum helper type.
+/// </summary>
 public class EnumHelper
 {
+    /// <summary>
+    /// Get values t.
+    /// </summary>
+    /// <typeparam name="T">The type T.</typeparam>
+    /// <param name="IncludeNope">The include nope.</param>
+    /// <param name="IncludeShared">The include shared.</param>
+    /// <returns>The get values t result.</returns>
     public static List<T> GetValues<T>(bool IncludeNope, bool IncludeShared)
         where T : struct
     {
@@ -29,6 +39,14 @@ public class EnumHelper
         return values;
     }
 
+    /// <summary>
+    /// Parse t.
+    /// </summary>
+    /// <typeparam name="T">The type T.</typeparam>
+    /// <param name="web">The web.</param>
+    /// <param name="_def">The def.</param>
+    /// <param name="returnDefIfNull">The return def if null.</param>
+    /// <returns>The parse t result.</returns>
     public static T Parse<T>(string web, T _def, bool returnDefIfNull = false)
        where T : struct
     {

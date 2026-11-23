@@ -5,7 +5,7 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <RootNamespace>SunamoWpf</RootNamespace>
     <Description>Utility helpers extracted from SunamoWpf (_sunamo layer)</Description>
-    <Version>26.10.7.9</Version>
+    <Version>26.11.23.1</Version>
     <Authors>www.sunamo.cz</Authors>
     <Copyright>www.sunamo.cz</Copyright>
     <PackageProjectUrl>https://sunamo.github.io/PlatformIndependentNuGetPackages/SunamoWpf.SunamoUtils/</PackageProjectUrl>
@@ -31,7 +31,7 @@
     <PackageReference Include="ObjectDumper.NET" Version="4.3.2" />
     <PackageReference Include="TextCopy" Version="6.2.1" />
     <PackageReference Include="System.Management" Version="10.0.8" />
-    <PackageReference Include="System.Security.Cryptography.Xml" Version="10.0.11" />
+    <PackageReference Include="System.Security.Cryptography.Xml" Version="10.0.15" />
   </ItemGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DefineConstants>$(DefineConstants);TRACE;ASYNC</DefineConstants>

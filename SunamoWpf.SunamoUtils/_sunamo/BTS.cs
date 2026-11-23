@@ -1,15 +1,39 @@
 namespace SunamoWpf._sunamo;
 
+/// <summary>
+/// Represents the BTS type.
+/// </summary>
 public class BTS
 {
     //        #region  from BTSShared64.cs
+    /// <summary>
+    /// The last int.
+    /// </summary>
     public static int lastInt = -1;
+    /// <summary>
+    /// The last long.
+    /// </summary>
     public static long lastLong = -1;
+    /// <summary>
+    /// The last float.
+    /// </summary>
     public static float lastFloat = -1;
+    /// <summary>
+    /// The last double.
+    /// </summary>
     public static double lastDouble = -1;
     private static Type type = typeof(BTS);
+    /// <summary>
+    /// The last byte.
+    /// </summary>
     public static byte lastByte = 255;
+    /// <summary>
+    /// The last bool.
+    /// </summary>
     public static bool lastBool;
+    /// <summary>
+    /// The last date time.
+    /// </summary>
     public static DateTime lastDateTime = DateTime.MinValue;
     ///// <summary>
     /////     Usage: Usage: Exceptions.ArrayElementContainsUnallowedStrings->SH.ContainsAny
@@ -21,17 +45,35 @@ public class BTS
     //{
     //    return isChar ? (T)(dynamic)c.First() : (T)(dynamic)c;
     //}
+    /// <summary>
+    /// Replace.
+    /// </summary>
+    /// <param name="text">The text.</param>
+    /// <param name="replaceCommaForDot">The replace comma for dot.</param>
+    /// <returns>The replace result.</returns>
     public static string Replace(ref string text, bool replaceCommaForDot)
     {
         if (replaceCommaForDot) text = text.Replace(",", ".");
         return text;
     }
+    /// <summary>
+    /// Is float.
+    /// </summary>
+    /// <param name="text">The text.</param>
+    /// <param name="replace">The replace.</param>
+    /// <returns>The is float result.</returns>
     public static bool IsFloat(string text, bool replace = false)
     {
         if (text == null) return false;
         Replace(ref text, replace);
         return float.TryParse(text.Replace(",", "."), out lastFloat);
     }
+    /// <summary>
+    /// Is double.
+    /// </summary>
+    /// <param name="text">The text.</param>
+    /// <param name="replace">The replace.</param>
+    /// <returns>The is double result.</returns>
     public static bool IsDouble(string text, bool replace = false)
     {
         if (text == null) return false;
@@ -57,6 +99,13 @@ public class BTS
                     throw new Exception(text + " is float but is calling IsInt");
         return result;
     }
+    /// <summary>
+    /// Is long.
+    /// </summary>
+    /// <param name="text">The text.</param>
+    /// <param name="excIfIsDouble">The exc if is double.</param>
+    /// <param name="replaceCommaForDot">The replace comma for dot.</param>
+    /// <returns>The is long result.</returns>
     public static bool IsLong(string text, bool excIfIsDouble = false, bool replaceCommaForDot = false)
     {
         if (text == null) return false;
@@ -70,10 +119,20 @@ public class BTS
         return result;
     }
     //        #endregion
+    /// <summary>
+    /// From hex.
+    /// </summary>
+    /// <param name="hexValue">The hex value.</param>
+    /// <returns>The from hex result.</returns>
     public static int FromHex(string hexValue)
     {
         return int.Parse(hexValue, NumberStyles.HexNumber);
     }
+    /// <summary>
+    /// Stream from string.
+    /// </summary>
+    /// <param name="text">The text.</param>
+    /// <returns>The stream from string result.</returns>
     public static Stream StreamFromString(string text)
     {
         var stream = new MemoryStream();
@@ -83,6 +142,11 @@ public class BTS
         stream.Position = 0;
         return stream;
     }
+    /// <summary>
+    /// String from stream.
+    /// </summary>
+    /// <param name="stream">The stream.</param>
+    /// <returns>The string from stream result.</returns>
     public static string StringFromStream(Stream stream)
     {
         var reader = new StreamReader(stream);
@@ -90,6 +154,11 @@ public class BTS
         return text;
     }
     #region Parse*
+    /// <summary>
+    /// Try parse bool.
+    /// </summary>
+    /// <param name="trim">The trim.</param>
+    /// <returns>The try parse bool result.</returns>
     public static bool TryParseBool(string trim)
     {
         return bool.TryParse(trim, out lastBool);
@@ -134,11 +203,22 @@ public class BTS
         // Zde jsem měl opačně znaménka, teď už by to mělo být správně
         return min <= value && max >= value;
     }
+    /// <summary>
+    /// Is.
+    /// </summary>
+    /// <param name="binFp">The bin fp.</param>
+    /// <param name="value">The value.</param>
+    /// <returns>The is result.</returns>
     public static bool Is(bool binFp, bool value)
     {
         if (value) return !binFp;
         return binFp;
     }
+    /// <summary>
+    /// Get only non null values.
+    /// </summary>
+    /// <param name="args">The args.</param>
+    /// <returns>The get only non null values result.</returns>
     public static List<string> GetOnlyNonNullValues(params string[] args)
     {
         var result = new List<string>();
@@ -155,6 +235,11 @@ public class BTS
         return result;
     }
     #region Get*ValueForType
+    /// <summary>
+    /// Get max value for type.
+    /// </summary>
+    /// <param name="type">The type.</param>
+    /// <returns>The get max value for type result.</returns>
     public static object GetMaxValueForType(Type type)
     {
         if (type == typeof(byte))
@@ -181,6 +266,11 @@ public class BTS
         throw new Exception("Nepovolen\u00FD nehodnotov\u00FD typ v metod\u011B GetMaxValueForType");
     }
     #endregion
+    /// <summary>
+    /// Clear endings bytes.
+    /// </summary>
+    /// <param name="plainTextBytes">The plain text bytes.</param>
+    /// <returns>The clear endings bytes result.</returns>
     public static List<byte> ClearEndingsBytes(List<byte> plainTextBytes)
     {
         var bytes = new List<byte>();
@@ -204,11 +294,22 @@ public class BTS
         }
         return bytes;
     }
+    /// <summary>
+    /// Parse int null.
+    /// </summary>
+    /// <param name="text">The text.</param>
+    /// <returns>The parse int null result.</returns>
     public static int? ParseIntNull(string text)
     {
         if (int.TryParse(text, out lastInt)) return lastInt;
         return null;
     }
+    /// <summary>
+    /// To string t.
+    /// </summary>
+    /// <typeparam name="T">The type T.</typeparam>
+    /// <param name="value">The value.</param>
+    /// <returns>The to string t result.</returns>
     public static string ToString<T>(T value)
     {
         return value.ToString();
@@ -247,6 +348,11 @@ public class BTS
         #endregion
         return null;
     }
+    /// <summary>
+    /// Is date time.
+    /// </summary>
+    /// <param name="text">The text.</param>
+    /// <returns>The is date time result.</returns>
     public static bool IsDateTime(string text)
     {
         if (text == null) return false;
@@ -263,33 +369,66 @@ public class BTS
         if (int.TryParse(entry.Replace(" ", string.Empty), out lastInt2)) return lastInt2;
         return int.MinValue;
     }
+    /// <summary>
+    /// Is bool.
+    /// </summary>
+    /// <param name="trim">The trim.</param>
+    /// <returns>The is bool result.</returns>
     public static bool IsBool(string trim)
     {
         if (trim == null) return false;
         return bool.TryParse(trim, out lastBool);
     }
+    /// <summary>
+    /// Parse byte.
+    /// </summary>
+    /// <param name="entry">The entry.</param>
+    /// <returns>The parse byte result.</returns>
     public static byte ParseByte(string entry)
     {
         byte lastInt2 = 0;
         if (byte.TryParse(entry, out lastInt2)) return lastInt2;
         return byte.MinValue;
     }
+    /// <summary>
+    /// Parse short.
+    /// </summary>
+    /// <param name="entry">The entry.</param>
+    /// <returns>The parse short result.</returns>
     public static short ParseShort(string entry)
     {
         return ParseShort(entry, short.MinValue);
     }
+    /// <summary>
+    /// Parse short.
+    /// </summary>
+    /// <param name="entry">The entry.</param>
+    /// <param name="defVal">The def val.</param>
+    /// <returns>The parse short result.</returns>
     public static short ParseShort(string entry, short defVal)
     {
         short lastInt2 = 0;
         if (short.TryParse(entry, out lastInt2)) return lastInt2;
         return defVal;
     }
+    /// <summary>
+    /// Parse int.
+    /// </summary>
+    /// <param name="entry">The entry.</param>
+    /// <param name="_default">The default.</param>
+    /// <returns>The parse int result.</returns>
     public static int? ParseInt(string entry, int? _default)
     {
         var lastInt2 = 0;
         if (int.TryParse(entry, out lastInt2)) return lastInt2;
         return _default;
     }
+    /// <summary>
+    /// Bool to string en.
+    /// </summary>
+    /// <param name="value">The value.</param>
+    /// <param name="lower">The lower.</param>
+    /// <returns>The bool to string en result.</returns>
     public static string BoolToStringEn(bool value, bool lower = false)
     {
         string result = null;
@@ -303,6 +442,11 @@ public class BTS
         }
         return result;
     }
+    /// <summary>
+    /// Get min value for type.
+    /// </summary>
+    /// <param name="idt">The idt.</param>
+    /// <returns>The get min value for type result.</returns>
     public static object GetMinValueForType(Type idt)
     {
         if (idt == typeof(byte))
@@ -331,6 +475,12 @@ public class BTS
         if (value.HasValue) return value.Value;
         return false;
     }
+    /// <summary>
+    /// Invert.
+    /// </summary>
+    /// <param name="value">The value.</param>
+    /// <param name="really">The really.</param>
+    /// <returns>The invert result.</returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool Invert(bool value, bool really)
     {
@@ -338,6 +488,13 @@ public class BTS
         return value;
     }
     #region For easy copy from BTSShared64.cs
+    /// <summary>
+    /// Cast to by t t.
+    /// </summary>
+    /// <typeparam name="T">The type T.</typeparam>
+    /// <param name="text">The text.</param>
+    /// <param name="isChar">The is char.</param>
+    /// <returns>The cast to by t t result.</returns>
     public static T CastToByT<T>(string text, bool isChar)
     {
         if (isChar)
@@ -370,17 +527,36 @@ public class BTS
         if (DateTime.TryParse(text, ciForParse, DateTimeStyles.None, out result)) return result;
         return defaultValue;
     }
+    /// <summary>
+    /// The last uint.
+    /// </summary>
     public static uint lastUint;
+    /// <summary>
+    /// Try parse uint.
+    /// </summary>
+    /// <param name="entry">The entry.</param>
+    /// <returns>The try parse uint result.</returns>
     public static bool TryParseUint(string entry)
     {
         // Pokud bude A1 null, výsledek bude false
         return uint.TryParse(entry, out lastUint);
     }
+    /// <summary>
+    /// Try parse date time.
+    /// </summary>
+    /// <param name="entry">The entry.</param>
+    /// <returns>The try parse date time result.</returns>
     public static bool TryParseDateTime(string entry)
     {
         if (DateTime.TryParse(entry, out lastDateTime)) return true;
         return false;
     }
+    /// <summary>
+    /// Try parse byte.
+    /// </summary>
+    /// <param name="text">The text.</param>
+    /// <param name="_def">The def.</param>
+    /// <returns>The try parse byte result.</returns>
     public static byte TryParseByte(string text, byte _def)
     {
         var result = _def;
@@ -398,6 +574,12 @@ public class BTS
         if (bool.TryParse(text, out result)) return result;
         return _default;
     }
+    /// <summary>
+    /// Try parse int check null.
+    /// </summary>
+    /// <param name="entry">The entry.</param>
+    /// <param name="def">The def.</param>
+    /// <returns>The try parse int check null result.</returns>
     public static int TryParseIntCheckNull(string entry, int def)
     {
         var lastInt = 0;
@@ -405,10 +587,23 @@ public class BTS
         if (int.TryParse(entry, out lastInt)) return lastInt;
         return def;
     }
+    /// <summary>
+    /// Try parse int.
+    /// </summary>
+    /// <param name="entry">The entry.</param>
+    /// <param name="def">The def.</param>
+    /// <returns>The try parse int result.</returns>
     public static int TryParseInt(string entry, int def)
     {
         return TryParseInt(entry, def, false);
     }
+    /// <summary>
+    /// Try parse int.
+    /// </summary>
+    /// <param name="entry">The entry.</param>
+    /// <param name="def">The def.</param>
+    /// <param name="throwEx">The throw ex.</param>
+    /// <returns>The try parse int result.</returns>
     public static int TryParseInt(string entry, int def, bool throwEx)
     {
         var lastInt = 0;
@@ -418,6 +613,11 @@ public class BTS
     }
     #endregion
     #region int <> bool
+    /// <summary>
+    /// Bool to int.
+    /// </summary>
+    /// <param name="value">The value.</param>
+    /// <returns>The bool to int result.</returns>
     public static int BoolToInt(bool value)
     {
         return Convert.ToInt32(value);
@@ -432,6 +632,11 @@ public class BTS
     }
     #endregion
     #region Parse*
+    /// <summary>
+    /// Parse float.
+    /// </summary>
+    /// <param name="ratingS">The rating s.</param>
+    /// <returns>The parse float result.</returns>
     public static float ParseFloat(string ratingS)
     {
         var result = float.MinValue;
@@ -459,6 +664,12 @@ public class BTS
         if (bool.TryParse(displayAnchors, out result)) return result;
         return def;
     }
+    /// <summary>
+    /// Parse int.
+    /// </summary>
+    /// <param name="entry">The entry.</param>
+    /// <param name="mustBeAllNumbers">The must be all numbers.</param>
+    /// <returns>The parse int result.</returns>
     public static int ParseInt(string entry, bool mustBeAllNumbers)
     {
         int parsed;
@@ -467,6 +678,12 @@ public class BTS
                 return int.MinValue;
         return parsed;
     }
+    /// <summary>
+    /// Parse double.
+    /// </summary>
+    /// <param name="entry">The entry.</param>
+    /// <param name="_default">The default.</param>
+    /// <returns>The parse double result.</returns>
     public static double ParseDouble(string entry, double _default)
     {
         //entry = SH.FromSpace160To32(entry);
@@ -476,6 +693,12 @@ public class BTS
         if (double.TryParse(entry, out lastDouble2)) return lastDouble2;
         return _default;
     }
+    /// <summary>
+    /// Parse int.
+    /// </summary>
+    /// <param name="entry">The entry.</param>
+    /// <param name="_default">The default.</param>
+    /// <returns>The parse int result.</returns>
     public static int ParseInt(string entry, int _default)
     {
         //entry = SH.FromSpace160To32(entry);
@@ -485,6 +708,12 @@ public class BTS
         if (int.TryParse(entry, out lastInt2)) return lastInt2;
         return _default;
     }
+    /// <summary>
+    /// Parse byte.
+    /// </summary>
+    /// <param name="entry">The entry.</param>
+    /// <param name="def">The def.</param>
+    /// <returns>The parse byte result.</returns>
     public static byte ParseByte(string entry, byte def)
     {
         byte lastInt2 = 0;
@@ -493,11 +722,22 @@ public class BTS
     }
     #endregion
     #region Is*
+    /// <summary>
+    /// Is byte.
+    /// </summary>
+    /// <param name="text">The text.</param>
+    /// <returns>The is byte result.</returns>
     public static bool IsByte(string text)
     {
         if (text == null) return false;
         return byte.TryParse(text, out lastByte);
     }
+    /// <summary>
+    /// Is byte.
+    /// </summary>
+    /// <param name="text">The text.</param>
+    /// <param name="parsedByte">The parsed byte.</param>
+    /// <returns>The is byte result.</returns>
     public static bool IsByte(string text, out byte parsedByte)
     {
         if (text == null)
@@ -549,21 +789,41 @@ public class BTS
 
     #endregion
     #region byte[] <> string
+    /// <summary>
+    /// Convert from utf 8 to bytes.
+    /// </summary>
+    /// <param name="vstup">The vstup.</param>
+    /// <returns>The convert from utf 8 to bytes result.</returns>
     public static List<byte> ConvertFromUtf8ToBytes(string vstup)
     {
         return Encoding.UTF8.GetBytes(vstup).ToList();
     }
+    /// <summary>
+    /// Convert from bytes to utf 8.
+    /// </summary>
+    /// <param name="bajty">The bajty.</param>
+    /// <returns>The convert from bytes to utf 8 result.</returns>
     public static string ConvertFromBytesToUtf8(List<byte> bajty)
     {
         //NH.RemoveEndingZeroPadding(bajty);
         return Encoding.UTF8.GetString(bajty.ToArray());
     }
+    /// <summary>
+    /// False or null.
+    /// </summary>
+    /// <param name="get">The get.</param>
+    /// <returns>The false or null result.</returns>
     public static bool FalseOrNull(object get)
     {
         return get == null || get.ToString() == false.ToString();
     }
     #endregion
     #region Casting between array - cant commented because it wasnt visible between
+    /// <summary>
+    /// Cast array object to string.
+    /// </summary>
+    /// <param name="args">The args.</param>
+    /// <returns>The cast array object to string result.</returns>
     public static List<string> CastArrayObjectToString(object[] args)
     {
         var result = new List<string>(args.Length);
@@ -571,6 +831,11 @@ public class BTS
         for (var index = 0; index < args.Length; index++) result[index] = args[index].ToString();
         return result;
     }
+    /// <summary>
+    /// Cast array int to string.
+    /// </summary>
+    /// <param name="args">The args.</param>
+    /// <returns>The cast array int to string result.</returns>
     public static List<string> CastArrayIntToString(int[] args)
     {
         var result = new List<string>(args.Length);
@@ -617,6 +882,12 @@ public class BTS
     //    }
     #endregion
     #region Casting to List
+    /// <summary>
+    /// Cast to int list u.
+    /// </summary>
+    /// <typeparam name="U">The type U.</typeparam>
+    /// <param name="values">The values.</param>
+    /// <returns>The cast to int list u result.</returns>
     public static List<int> CastToIntList<U>(IList<U> values)
     {
         return CAToNumber.ToNumber(int.Parse, values);
@@ -650,6 +921,11 @@ public class BTS
         for (var index = 0; index < numbers.Count; index++) result.Add(numbers[index]);
         return result;
     }
+    /// <summary>
+    /// Cast collection int to short.
+    /// </summary>
+    /// <param name="numbers">The numbers.</param>
+    /// <returns>The cast collection int to short result.</returns>
     public static List<short> CastCollectionIntToShort(List<int> numbers)
     {
         var result = new List<short>(numbers.Count);
@@ -665,6 +941,11 @@ public class BTS
     }
     #endregion
     #region MakeUpTo*NumbersToZero
+    /// <summary>
+    /// Make up to 3 numbers to zero.
+    /// </summary>
+    /// <param name="number">The number.</param>
+    /// <returns>The make up to 3 numbers to zero result.</returns>
     public static object MakeUpTo3NumbersToZero(int number)
     {
         var digitsCount = number.ToString().Length;
@@ -673,6 +954,11 @@ public class BTS
         if (digitsCount == 2) return "00" + number;
         return number;
     }
+    /// <summary>
+    /// Make up to 2 numbers to zero.
+    /// </summary>
+    /// <param name="number">The number.</param>
+    /// <returns>The make up to 2 numbers to zero result.</returns>
     public static object MakeUpTo2NumbersToZero(int number)
     {
         if (number.ToString().Length == 1) return "0" + number;
@@ -696,6 +982,11 @@ public class BTS
         return day + "." + month + "." + year + " " + hour + ":" +
                minutes + ":" + seconds; // +":" + miliseconds;
     }
+    /// <summary>
+    /// Same lenght all dates.
+    /// </summary>
+    /// <param name="dateTime">The date time.</param>
+    /// <returns>The same lenght all dates result.</returns>
     public static string SameLenghtAllDates(DateTime dateTime)
     {
         var year = dateTime.Year.ToString();
@@ -705,6 +996,11 @@ public class BTS
             day + "." + month + "." +
             year; // +"" + hour + ":" + minutes + ":" + seconds;// +":" + miliseconds;
     }
+    /// <summary>
+    /// Same lenght all times.
+    /// </summary>
+    /// <param name="dateTime">The date time.</param>
+    /// <returns>The same lenght all times result.</returns>
     public static string SameLenghtAllTimes(DateTime dateTime)
     {
         var hour = dateTime.Hour.ToString("D2");
@@ -712,11 +1008,22 @@ public class BTS
         var seconds = dateTime.Second.ToString("D2");
         return hour + ":" + minutes + ":" + seconds; // +":" + miliseconds;
     }
+    /// <summary>
+    /// Usa date time to string.
+    /// </summary>
+    /// <param name="dateTime">The date time.</param>
+    /// <returns>The usa date time to string result.</returns>
     public static string UsaDateTimeToString(DateTime dateTime)
     {
         return dateTime.Month + "/" + dateTime.Day + "/" + dateTime.Year + " " + dateTime.Hour +
                ":" + dateTime.Minute + ":" + dateTime.Second; // +":" + miliseconds;
     }
+    /// <summary>
+    /// Equal date without time.
+    /// </summary>
+    /// <param name="dt1">The dt 1.</param>
+    /// <param name="dt2">The dt 2.</param>
+    /// <returns>The equal date without time result.</returns>
     public static bool EqualDateWithoutTime(DateTime dt1, DateTime dt2)
     {
         if (dt1.Day == dt2.Day && dt1.Month == dt2.Month && dt1.Year == dt2.Year) return true;
@@ -734,6 +1041,13 @@ public class BTS
         for (var index = from; index < max; index++) result.Add(index.ToString());
         return result.ToArray();
     }
+    /// <summary>
+    /// Get numbered list from to.
+    /// </summary>
+    /// <param name="start">The start.</param>
+    /// <param name="max">The max.</param>
+    /// <param name="postfix">The postfix.</param>
+    /// <returns>The get numbered list from to result.</returns>
     public static List<string> GetNumberedListFromTo(int start, int max, string postfix = ". ")
     {
         max++;
